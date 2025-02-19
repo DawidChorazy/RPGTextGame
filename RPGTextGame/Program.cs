@@ -93,7 +93,7 @@
             case 8:
             case 9:
             case 10:
-                Console.WriteLine("Nothing Happens"); // skipping
+                Console.WriteLine("Nothing Happens"); // skippin
                 break;
             case 11:
             case 12:
