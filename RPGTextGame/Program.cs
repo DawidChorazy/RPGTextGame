@@ -2,10 +2,14 @@
 {
     public static void Main(string[] args)
     {
-        StartOfGame();
-        RandomEventGenerator();
+        Player player = StartOfGame();
+        while (player.Health > 0)
+        {
+            RandomEventGenerator(player);    
+        }
+        
     }
-    public static void StartOfGame()
+    public static Player StartOfGame()
     {
         Console.WriteLine("Welcome to RPGTextGame!");
         Console.WriteLine("Choose your Name:");
@@ -44,18 +48,18 @@
                 }
             }
         }
-        
+        return new Player(name, className, race, 100, 10);
     }
 
-    public static void RandomEventGenerator()
+    public static void RandomEventGenerator(Player player)
     {
-        Dictionary<int, string> opponents = new Dictionary<int, string>
+        Dictionary<int, Enemy> opponents = new Dictionary<int, Enemy>
         {
-            { 1, "Goblin" },
-            { 2, "Chupacabra" },
-            { 3, "Wolf" },
-            { 4, "Ghost" },
-            { 5, "Wild boar" }
+            { 1, new Enemy("Goblin", 20, 4)},
+            { 2, new Enemy("Chupacabra", 12, 7) },
+            { 3, new Enemy("Wolf", 10, 10) },
+            { 4, new Enemy("Ghost", 33, 2) },
+            { 5, new Enemy("Wild Boar", 28, 2) }
         };
         
         Random randomOpponentOutput = new Random();
@@ -64,30 +68,36 @@
         
         int randomCrossroad = randomCrossroadOutput.Next(1, 4);
         int die = randomDiceOutput.Next(1, 21);
-        int opponent = randomOpponentOutput.Next(opponents.Count + 1);
-
+        int enemyIndex = randomOpponentOutput.Next(1, 6);
+        Enemy enemy = opponents[enemyIndex];
+        
+    if(player.Health > 0)
+    {
         switch (die)
         {
             case 1:
-                Console.WriteLine("Critical failure! You stepped into the trap!"); // losing hp
-                break;
+                Console.WriteLine("Critical failure! You stepped into the trap!");
+
+                Console.WriteLine($"You lost {die} of health points. Your current health is {player.Health - die}");
+             break; 
             case 2:
             case 3:
             case 4:
                 Console.WriteLine("You found the enemy (You cannot run away nor hide)"); // only fight option
-                Console.WriteLine($"You are fighting {opponent}!");
+                Console.WriteLine($"You are fighting {enemy.Name} with power of {enemy.Attack} and {enemy.Health} health!");
+                Fighting(player, enemy);
                 break;
             case 5:
-                case 6:
-                case 7:
-                case 8:
-                case 9:
-                case 10:
+            case 6:
+            case 7:
+            case 8:
+            case 9:
+            case 10:
                 Console.WriteLine("Nothing Happens"); // skipping
                 break;
             case 11:
-                case 12:
-                case 13:
+            case 12:
+            case 13:
                 Console.WriteLine("Crossroads! Choose to go left or right:");
                 string cross = Console.ReadLine();
                 if (randomCrossroad == 1)
@@ -101,23 +111,47 @@
                     break;
                 }
             case 14:
-                case 15:
-                case 16:
-                case 17:
+            case 15:
+            case 16:
+            case 17:
                 Console.WriteLine("You found enemy (You can attack or flee)"); // attacking enemy or fleeing
                 break;
             case 18:
-                case 19:
-                    Console.WriteLine("You found supplies"); // default supplies
-                    break;
-                case 20:
-                    Console.WriteLine("You found treasure"); // better supplies
-                    break;
+            case 19:
+                Console.WriteLine("You found supplies"); // default supplies
+                break;
+            case 20:
+                Console.WriteLine("You found treasure"); // better supplies
+                break; 
         }
     }
+    }
 
-    public static void Fighting()
+    public static void Fighting(Player player, Enemy opp)
     {
+        Random randomAttackDie = new Random();
+        int attack = randomAttackDie.Next(1, 21);
+        string option = "";
+        Console.WriteLine("Choose one:");
+        Console.WriteLine("Attack");
+        Console.WriteLine("Flee");
+        if (option == "Attack")
+        {
+            if (player.Health > 0 && opp.Health > 0)
+            {
+                opp.Health -= attack;
+                player.Health -= opp.Attack;
+            }
+            else if (player.Health <= 0)
+            {
+                Console.WriteLine("Unexpectedly your opponent gives you a kiss of sudden death");
+            }
+            else if (opp.Health <= 0)
+            {
+                Console.WriteLine("You slained your opponent");
+            }
+        }
+        // add flee mechanic
         
     }
 }
@@ -128,11 +162,31 @@ public class Player
     public string Class {get; set;}
     public string Race {get; set;}
 
-    public Player(string name, string className, string race)
+    public int Health { get; set; } = 100;
+
+    public int Attack { get; set; }
+
+    public Player(string name, string className, string race, int health, int attack)
     {
         Name = name;
         Class = className;
         Race = race;
+        Health = health;
+        Attack = attack;
+    }
+}
+
+public class Enemy
+{
+    public string Name { get; set; }
+    public int Health { get; set; }
+    public int Attack  {get; set;}
+
+    public Enemy(string name, int health, int attack)
+    {
+        Name = name;
+        Health = health;
+        Attack = attack;
     }
 }
 
