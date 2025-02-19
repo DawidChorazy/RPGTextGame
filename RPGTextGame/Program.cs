@@ -57,11 +57,11 @@ public class Program
     {
         Dictionary<int, Enemy> opponents = new Dictionary<int, Enemy>
         {
-            { 1, new Enemy("Goblin", 20, 4)},
-            { 2, new Enemy("Chupacabra", 12, 7) },
-            { 3, new Enemy("Wolf", 10, 10) },
-            { 4, new Enemy("Ghost", 33, 2) },
-            { 5, new Enemy("Wild Boar", 28, 2) }
+            { 1, new Enemy("Goblin", 20, 7)},
+            { 2, new Enemy("Chupacabra", 12, 10) },
+            { 3, new Enemy("Wolf", 10, 14) },
+            { 4, new Enemy("Ghost", 33, 5) },
+            { 5, new Enemy("Wild Boar", 28, 4) }
         };
         
         Random randomOpponentOutput = new Random();
@@ -89,7 +89,6 @@ public class Program
             case 3:
             case 4:
                 Console.WriteLine("You found the enemy. You cannot run away nor hide.");
-                Thread.Sleep(2000);// only fight option
                 Console.WriteLine($"You are fighting {enemy.Name} with power of {enemy.Attack} and {enemy.Health} health!");
                 Thread.Sleep(2000);
                 Fighting(player, enemy);
@@ -127,15 +126,26 @@ public class Program
             case 16:
             case 17:
                 Console.WriteLine("You found enemy (You can fight or flee)"); // attack or flee
-                option = Console.ReadLine().ToLower();
-                if (option == "fight")
+                Console.WriteLine($"You are fighting {enemy.Name} with power of {enemy.Attack} and {enemy.Health} health!");
+                while (true)
                 {
-                    Fighting(player, enemy);
+                    option = Console.ReadLine().ToLower();
+                    if (option == "fight")
+                    {
+                        Fighting(player, enemy);
+                        break;
+                    }
+                    else if (option == "flee")
+                    {
+                        Flee(player, enemy);
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid option");
+                    }
                 }
-                else if (option == "flee")
-                {
-                    Flee(player, enemy);
-                }
+
                 Thread.Sleep(2000);
                 break;
             
