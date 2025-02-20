@@ -1,11 +1,18 @@
 ﻿using System.Globalization;
+using RPGTextGame;
 
-public class Program
+public class Program : Player
 {
+    public Program(string name, string className, string race, int health, int attack, int experience, int level,
+        int intelligence, int defense) : base(name, className, race, health, attack, experience, level, intelligence,
+        defense)
+    {
+    }
+
     public static void Main(string[] args)
     {
         Player player = StartOfGame();
-        
+
         while (player.Health > 0)
         {
             RandomEventGenerator(player);
@@ -53,7 +60,7 @@ public class Program
             }
         }
 
-        return new Player(name, className, race, 100, 10,0, 1, 0, 0);
+        return new Player(name, className, race, 100, 10, 0, 1, 0, 0);
     }
 
     public static void RandomEventGenerator(Player player)
@@ -62,7 +69,7 @@ public class Program
         {
             { 1, new Enemy("Goblin", 20, 7, 105) },
             { 2, new Enemy("Chupacabra", 12, 10, 104) }, //TODO EXP TO CHANGE, SHOULDNT BE 100
-            { 3, new Enemy("Wolf", 10, 14, 103) },  // If higher level, higher difficulty
+            { 3, new Enemy("Wolf", 10, 14, 103) }, // If higher level, higher difficulty
             { 4, new Enemy("Ghost", 33, 5, 102) },
             { 5, new Enemy("Wild Boar", 28, 4, 101) }
         };
@@ -104,7 +111,7 @@ public class Program
                 case 8:
                 case 9:
                 case 10:
-                    Console.WriteLine("Nothing Happens"); 
+                    Console.WriteLine("Nothing Happens");
                     Thread.Sleep(2000);
                     break;
                 case 11:
@@ -145,7 +152,7 @@ public class Program
                         }
                         else if (option == "flee")
                         {
-                            Flee(player, enemy);
+                            Flee(player);
                             break;
                         }
                         else
@@ -255,113 +262,7 @@ public class Program
             }
         }
     }
-
-
-    public static void Flee(Player player, Enemy opp)
-    {
-        Random randomFleeDie = new Random();
-        int fleeDie = randomFleeDie.Next(1, 21);
-
-        if (fleeDie >= 10)
-        {
-            Console.WriteLine("You succeeded to flee");
-        }
-        else
-        {
-            player.Health -= fleeDie;
-            Console.WriteLine($"You failed to flee and lost {fleeDie} hp due to opportunist attack ");
-        }
-    }
-
-    public static void PlayerAttributes(Player player)
-    {
-        Console.WriteLine("Choose which attributes you want to upgrade (3 points) [attack,defence,health,intelligence(not implemented)]"); //TODO int not implemented
-        
-        for (int i = 0; i < 3; i++)
-        {
-            while (true)
-            {
-                string option = Console.ReadLine().ToLower();
-                
-                if (option == "attack")
-                {
-                    player.Attack += 2;
-                    Console.WriteLine($"Attack has been improved! Your current attack {player.Attack}");
-                    break;
-                }
-                else if (option == "defense")
-                {
-                    player.Defense += 2;
-                    Console.WriteLine($"Defense has been improved! Your current defense {player.Defense}");
-                    break;
-                }
-                else if (option == "health")
-                {
-                    player.Health += 10;
-                    Console.WriteLine($"Health has been improved! Your current health {player.Health}");
-                    break;
-                }
-                else if (option == "intelligence")
-                {
-                    player.Intelligence += 2;
-                    Console.WriteLine($"Intelligence has been improved! Your current intelligence {player.Intelligence}");
-                    break;
-                }
-                else
-                {
-                    Console.WriteLine("Invalid option. Please try again.");
-                }
-            }
-        }
-    }
-
-    public class Player
-    {
-        public string Name { get; set; }
-        public string Class { get; set; }
-        public string Race { get; set; }
-
-        public int Health { get; set; } = 100;
-
-        public int Attack { get; set; }
-        
-        public int Defense { get; set; }
-        public int Intelligence { get; set; }
-
-        public int Experience { get; set; } = 0;
-        public int Level { get; set; } = 1;
-
-        public Player(string name, string className, string race, int health, int attack, int experience, int level, int intelligence, int defense)
-        {
-            Name = name;
-            Class = className;
-            Race = race;
-            Health = health;
-            Attack = attack;
-            Experience = experience;
-            Level = level;
-            Intelligence = intelligence;
-            Defense = defense;
-            
-        }
-    }
-
-    public class Enemy
-    {
-        public string Name { get; set; }
-        public int Health { get; set; }
-        public int Attack { get; set; }
-        
-        public int ExperienceAfterDefeated { get; set; }
-
-        public Enemy(string name, int health, int attack, int experienceAfterDefeated)
-        {
-            Name = name;
-            Health = health;
-            Attack = attack;
-            ExperienceAfterDefeated = experienceAfterDefeated;
-        }
-    }
 }
+
 
 
