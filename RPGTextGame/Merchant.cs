@@ -37,42 +37,73 @@ public class Merchant: Characters
 
         }
 
-        public static void Buying(Player player)
+        public static void Buying(Player player, Merchant foundMerchant) // Buying items is case sensitive. Need to type in trade EXACT SAME name of item to buy it
         {
-            Random random = new Random();
-            string option = Console.ReadLine().ToLower();
-            int randomMerchantId = merchants.Keys.ElementAt(random.Next(0, merchants.Count));
-            Merchant foundMerchant = merchants[randomMerchantId];
-            
-            Console.WriteLine("Type in 'trade' to trade or 'exit' to move on.");
+            Console.WriteLine("Do you want to buy something? [trade/exit]");
             while (true)
             {
-                if (option == "trade")
+                Console.WriteLine("[trade/exit] ");
+                string option = Console.ReadLine().ToLower();
+                if (option.ToLower() == "trade")
                 {
-                    foreach (var item in foundMerchant.ShopItems)
+                    while (true)
                     {
-                        Console.WriteLine(item);
-                    }
-                    Console.WriteLine("Type in what do you want to buy:");
-                    string buyOption = Console.ReadLine().ToLower();
-                    for (int i = 0; i < foundMerchant.ShopItems.Count; i++)
-                    {
-                        if (buyOption == foundMerchant.ShopItems.ElementAt(i).Key)
+                        foreach (var item in foundMerchant.ShopItems)
                         {
-                            Console.WriteLine($"An {foundMerchant.ShopItems.ElementAt(i).Key} is added to your inventory.");
-                            break;
+                            Console.WriteLine($"{item.Key} - {item.Value} coins");
                         }
+
+                        Console.WriteLine("Type in what do you want to buy or type 'exit' to leave");
+                        string buyOption = Console.ReadLine();
+              
+                            if (buyOption.ToLower() == "exit")
+                            {
+                                return;
+                            }
+                            if (foundMerchant.ShopItems.TryGetValue(buyOption, out int price))
+                            {
+                                if (player.Coins >= price)
+                                {
+                                    player.Coins -= price;
+                                    Console.WriteLine($"You bought a {buyOption}! It has been added to your inventory.");
+                                }
+                                else
+                                {
+                                    Console.WriteLine("You don't have enough coins to buy this item.");
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine("Invalid item. Please choose from the list.");
+                            }
+
+                            Console.WriteLine("Do you want to buy another item? [Y/N]");
+                            string continueBuying = Console.ReadLine().ToLower();
+                            if (continueBuying.ToLower() != "y")
+                            {
+                                return;
+                            }
+
+                            break;
+                            
                     }
                 }
+
                 else if (option == "exit")
                 {
-                    break;
+                    return;
                 }
                 else
                 {
                     Console.WriteLine("Please enter a valid option");
                 }
             }
+        }
+        public static Merchant GetRandomMerchant()
+        {
+            Random random = new Random();
+            int randomMerchantId = merchants.Keys.ElementAt(random.Next(merchants.Count));
+            return merchants[randomMerchantId];
         }
         
 }

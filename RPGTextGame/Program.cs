@@ -61,16 +61,17 @@ public class Program
     public static void RandomEventGenerator(Player player)
     {
         
-
+        Random randomD2Output = new Random();
         Random randomD4Output = new Random();
         Random randomD6Output = new Random();
         Random randomD20Output = new Random();
         Random randomD50Output = new Random();
 
         string option = "";
+        int randomD2 = randomD2Output.Next(1, 3);
         int randomD4 = randomD4Output.Next(1, 5);
-        int randomD20 = randomD20Output.Next(1, 21); //die
         int randomD5 = randomD6Output.Next(1, 6); // enemy index
+        int randomD20 = randomD20Output.Next(1, 21); //die
         int randomD50 = randomD50Output.Next(1, 51);
         Enemy enemy = Enemy.GetEnemy(randomD5);
         
@@ -130,8 +131,9 @@ public class Program
                 case 15:
                     Console.WriteLine("On your path from the darkness you hear elderly voice...");
                     Thread.Sleep(2000);
-                    Console.WriteLine($"It's a {Merchant.merchants[1].Name}. You can buy something from him");
-                    Merchant.Buying(player);
+                    Merchant randomMerchant = Merchant.GetRandomMerchant();
+                    Console.WriteLine($"It's a {randomMerchant.Name}. You can buy something from him");
+                    Merchant.Buying(player, randomMerchant);
                     break;
                 
                 case 16:
@@ -245,6 +247,7 @@ public class Program
             Player.ExperianceGain(player, opp.ExperienceAfterDefeated);
         }
     }
+    
 }
 
 
