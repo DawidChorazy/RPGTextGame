@@ -1,13 +1,9 @@
 ﻿using System.Globalization;
 using RPGTextGame;
 
-public class Program : Player
+public class Program
 {
-    public Program(string name, string className, string race, int health, int attack, int experience, int level,
-        int intelligence, int defense) : base(name, className, race, health, attack, experience, level, intelligence,
-        defense)
-    {
-    }
+
 
     public static void Main(string[] args)
     {
@@ -17,81 +13,76 @@ public class Program : Player
         {
             RandomEventGenerator(player);
         }
-
     }
-
     public static Player StartOfGame()
-    {
-        Console.WriteLine("Welcome to RPGTextGame!");
-        Console.WriteLine("Choose your Name:");
-        string name = Console.ReadLine();
-        string className = "";
-        string race = "";
-
-        while (true)
         {
-            Console.WriteLine("Choose your class (rogue, archer, warrior, mage):");
-            className = Console.ReadLine();
+            Console.WriteLine("Welcome to RPGTextGame!");
+            Console.WriteLine("Choose your Name:");
+            string name = Console.ReadLine();
+            string className = "";
+            string race = "";
 
-            if (className == "rogue" || className == "archer" || className == "warrior" || className == "mage")
+            while (true)
             {
-                break;
-            }
-            else
-            {
-                Console.WriteLine("Invalid class, enter once again");
+                Console.WriteLine("Choose your class (rogue, archer, warrior, mage):");
+                className = Console.ReadLine();
 
-            }
-        }
-
-        while (true)
-        {
-            Console.WriteLine("Choose your race (human, elf, orc, dwarf):");
-            race = Console.ReadLine();
-            {
-                if (race == "human" || race == "elf" || race == "orc" || race == "dwarf")
+                if (className == "rogue" || className == "archer" || className == "warrior" || className == "mage")
                 {
                     break;
                 }
                 else
                 {
-                    Console.WriteLine("Invalid race, enter once again");
+                    Console.WriteLine("Invalid class, enter once again");
+
                 }
             }
-        }
 
-        return new Player(name, className, race, 100, 10, 0, 1, 0, 0);
-    }
+            while (true)
+            {
+                Console.WriteLine("Choose your race (human, elf, orc, dwarf):");
+                race = Console.ReadLine();
+                {
+                    if (race == "human" || race == "elf" || race == "orc" || race == "dwarf")
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid race, enter once again");
+                    }
+                }
+            }
 
+            return new Player(name, className, race);
+        } 
+        
+    
     public static void RandomEventGenerator(Player player)
     {
-        Dictionary<int, Enemy> opponents = new Dictionary<int, Enemy>
-        {
-            { 1, new Enemy("Goblin", 20, 7, 105) },
-            { 2, new Enemy("Chupacabra", 12, 10, 104) }, //TODO EXP TO CHANGE, SHOULDNT BE 100
-            { 3, new Enemy("Wolf", 10, 14, 103) }, // If higher level, higher difficulty
-            { 4, new Enemy("Ghost", 33, 5, 102) },
-            { 5, new Enemy("Wild Boar", 28, 4, 101) }
-        };
+        
 
-        Random randomOpponentOutput = new Random();
-        Random randomDiceOutput = new Random();
-        Random randomCrossroadOutput = new Random();
+        Random randomD4Output = new Random();
+        Random randomD6Output = new Random();
+        Random randomD20Output = new Random();
+        Random randomD50Output = new Random();
 
         string option = "";
-        int randomCrossroad = randomCrossroadOutput.Next(1, 4);
-        int die = randomDiceOutput.Next(1, 21);
-        int enemyIndex = randomOpponentOutput.Next(1, 6);
-        Enemy enemy = opponents[enemyIndex];
+        int randomD4 = randomD4Output.Next(1, 5);
+        int randomD20 = randomD20Output.Next(1, 21); //die
+        int randomD5 = randomD6Output.Next(1, 6); // enemy index
+        int randomD50 = randomD50Output.Next(1, 51);
+        Enemy enemy = Enemy.GetEnemy(randomD5);
+        
 
         if (player.Health > 0)
         {
-            switch (die)
+            switch (randomD20)
             {
                 case 1:
                     Console.WriteLine("Critical failure! You stepped into the trap!");
-                    player.Health -= die;
-                    Console.WriteLine($"You lost {die} of health points. Your current health is {player.Health - die}");
+                    player.Health -= randomD20;
+                    Console.WriteLine($"You lost {randomD20} of health points. Your current health is {player.Health - randomD20}");
                     Thread.Sleep(2000);
                     break;
 
@@ -119,11 +110,11 @@ public class Program : Player
                 case 13:
                     Console.WriteLine("Crossroads! Choose to go left or right:");
                     string cross = Console.ReadLine().ToLower();
-                    if (randomCrossroad == 1)
+                    if (randomD4 == 1)
                     {
-                        player.Health -= die;
+                        player.Health -= randomD20;
                         Console.WriteLine(
-                            $"You lost {die} health points due to stepping into trap! Your current health is {player.Health}");
+                            $"You lost {randomD20} health points due to stepping into trap! Your current health is {player.Health}");
                         Thread.Sleep(2000);
 
                     }
@@ -137,6 +128,12 @@ public class Program : Player
 
                 case 14:
                 case 15:
+                    Console.WriteLine("On your path from the darkness you hear elderly voice...");
+                    Thread.Sleep(2000);
+                    Console.WriteLine($"It's a {Merchant.merchants[1].Name}. You can buy something from him");
+                    Merchant.Buying(player);
+                    break;
+                
                 case 16:
                 case 17:
                     Console.WriteLine("You found enemy (You can fight or flee)");
@@ -152,7 +149,7 @@ public class Program : Player
                         }
                         else if (option == "flee")
                         {
-                            Flee(player);
+                            Player.Flee(player);
                             break;
                         }
                         else
@@ -167,11 +164,13 @@ public class Program : Player
                 case 18:
                 case 19:
                     Console.WriteLine("You found supplies"); //TODO add supplies(default)
+                    Player.CoinsGain(player, randomD20);
                     Thread.Sleep(2000);
                     break;
 
                 case 20:
                     Console.WriteLine("You found treasure"); //TODO add supplies(better)
+                    Player.CoinsGain(player, randomD50);
                     Thread.Sleep(2000);
                     break;
 
@@ -190,7 +189,7 @@ public class Program : Player
         {
             roundCounter++;
             Console.WriteLine($"ROUND {roundCounter}");
-            Console.WriteLine($"[attack/defend]");
+            Console.WriteLine("[attack/defend]");
 
             while (true)
             {
@@ -205,18 +204,12 @@ public class Program : Player
 
             if (option == "attack")
             {
-                int attack = randomAttackDie.Next(1, 21);
-                opp.Health = Math.Max(0, opp.Health - attack);
-                Console.WriteLine(
-                    $"You attacked the beast for {attack} health points! Remaining health is {opp.Health} ");
-                Thread.Sleep(2000);
-
+                Console.WriteLine($"Enemy got {opp.GetDamage(player, false)} damage. Current enemy health is {opp.Health}");
             }
             else if (option == "defend")
             {
                 Console.WriteLine("You try to defend against monster");
                 defendActive = true;
-
             }
 
 
@@ -225,19 +218,16 @@ public class Program : Player
                 int defensiveDamageTaken = opp.Attack / 2;
                 if (defendActive == true)
                 {
-                    player.Health = Math.Max(0, player.Health - defensiveDamageTaken - player.Defense);
                     Console.WriteLine(
-                        $"You got hit for {defensiveDamageTaken - player.Defense}. You have {player.Health} remaining life points");
+                        $"You got hit for {player.GetDamage(opp, true)}. You have {player.Health} remaining life points");
+                    
                     defendActive = false;
-                    Thread.Sleep(2000);
                 }
                 else
                 {
-                    player.Health = Math.Max(0, player.Health - opp.Attack);
                     Console.WriteLine(
-                        $"You got hit for {opp.Attack}. You have {player.Health} remaining life points");
-                    Thread.Sleep(2000);
-
+                        $"You got hit for {player.GetDamage(opp, false)}. You have {player.Health} remaining life points");
+                    
                 }
             }
         }
@@ -251,15 +241,8 @@ public class Program : Player
         else if (opp.Health <= 0)
         {
             Console.WriteLine("You have slain your opponent");
-            player.Experience += opp.ExperienceAfterDefeated;
-            Console.WriteLine($"Achieved {opp.ExperienceAfterDefeated} xp. Current Experience is {player.Experience}/100");
-            if (player.Experience >= 100)
-            {
-                player.Level += 1;
-                player.Experience -= 100;
-                Console.WriteLine($"Level up! You are currently Lvl.{player.Level}");
-                PlayerAttributes(player);
-            }
+            Player.CoinsGain(player, opp.CoinsAfterDefeated );
+            Player.ExperianceGain(player, opp.ExperienceAfterDefeated);
         }
     }
 }

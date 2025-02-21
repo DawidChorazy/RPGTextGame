@@ -1,18 +1,47 @@
 namespace RPGTextGame;
 
-public class Enemy
+public class Enemy: Characters
 {
-    public string Name { get; set; }
-    public int Health { get; set; }
-    public int Attack { get; set; }
-
-    public int ExperienceAfterDefeated { get; set; }
-
-    public Enemy(string name, int health, int attack, int experienceAfterDefeated)
+    public static Dictionary<int, (string,int,int,int,int)> opponents = new Dictionary<int, (string,int, int, int, int)>
     {
+        { 1, ("Goblin", 20, 10,10 , 105) },
+        { 2, ("Chupacabra", 12, 9, 9, 104) }, //TODO EXP TO CHANGE, SHOULDNT BE 100
+        { 3, ("Wolf", 10, 12, 12, 103) }, // If higher level, higher difficulty
+        { 4, ("Ghost", 33, 5, 5, 102) },
+        { 5, ("Wild Boar", 28, 7, 7, 101) }
+    };
+    public string Name { get; set; }
+    public override int Health { get; set; }
+    public override int Attack { get; set; }
+    
+    private int MinAttack { get; set; }
+    private int MaxAttack { get; set; }
+    public int ExperienceAfterDefeated { get; set; }
+    
+    public int CoinsAfterDefeated { get; set; }
+    
+    public Enemy(string name, int health, int minAttack, int maxAttack, int experienceAfterDefeated)
+    {
+        Random random = new Random();
+        int randomizedAttack = random.Next(minAttack, maxAttack);
+        int randomizedCoinsAfterDefeated = random.Next(1, 6);
+        
         Name = name;
         Health = health;
-        Attack = attack;
+        Attack = randomizedAttack;
         ExperienceAfterDefeated = experienceAfterDefeated;
+        CoinsAfterDefeated = randomizedCoinsAfterDefeated;
     }
+
+    public static Enemy GetEnemy(int id)
+    {
+        if (opponents.ContainsKey(id))
+        {
+            var data = opponents[id];
+            return new Enemy(data.Item1, data.Item2, data.Item3, data.Item4, data.Item5);
+        }
+        return null; 
+    }
+
+    
 }
