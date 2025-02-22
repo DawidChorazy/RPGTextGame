@@ -64,6 +64,7 @@ public class Program
         Random randomD2Output = new Random();
         Random randomD4Output = new Random();
         Random randomD6Output = new Random();
+        Random randomD10Output = new Random();
         Random randomD20Output = new Random();
         Random randomD50Output = new Random();
 
@@ -71,6 +72,7 @@ public class Program
         int randomD2 = randomD2Output.Next(1, 3);
         int randomD4 = randomD4Output.Next(1, 5);
         int randomD5 = randomD6Output.Next(1, 6); // enemy index
+        int randomD10 = randomD10Output.Next(1, 11);
         int randomD20 = randomD20Output.Next(1, 21); //die
         int randomD50 = randomD50Output.Next(1, 51);
         Enemy enemy = Enemy.GetEnemy(randomD5);
@@ -82,8 +84,7 @@ public class Program
             {
                 case 1:
                     Console.WriteLine("Critical failure! You stepped into the trap!");
-                    player.Health -= randomD20;
-                    Console.WriteLine($"You lost {randomD20} of health points. Your current health is {player.Health - randomD20}");
+                    Console.WriteLine($"You lost {randomD10} of health points. Your current health is {player.Health - randomD10}");
                     Thread.Sleep(2000);
                     break;
 

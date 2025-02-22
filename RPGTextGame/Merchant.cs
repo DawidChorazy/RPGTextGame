@@ -30,7 +30,7 @@ public class Merchant: Characters
         public Merchant(string name, Dictionary<string,int> shopItems)
         {
             Name = name;
-            ShopItems = shopItems;
+            ShopItems = shopItems.ToDictionary(x => x.Key.ToLower(), x => x.Value);
 
             Attack = 60;
             Health = 300;
