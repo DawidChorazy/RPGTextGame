@@ -77,11 +77,11 @@ public class Merchant: Characters
                                 Console.WriteLine("Invalid item. Please choose from the list.");
                             }
 
-                            Console.WriteLine("Do you want to buy another item? [Y/N]");
+                            Console.WriteLine("Do you want to buy another item? [trade/exit]");
                             string continueBuying = Console.ReadLine().ToLower();
-                            if (continueBuying.ToLower() != "y")
+                            if (continueBuying == "trade")
                             {
-                                return;
+                                Buying(player, foundMerchant);
                             }
 
                             break;

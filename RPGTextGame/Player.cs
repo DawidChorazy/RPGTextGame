@@ -3,7 +3,7 @@ using System.Data;
 
 namespace RPGTextGame;
 
-public class Player: Characters
+public class Player : Characters
 {
     private string Name { get; set; }
     private string Class { get; set; }
@@ -19,10 +19,15 @@ public class Player: Characters
 
     private int Experience { get; set; } = 0;
     private int Level { get; set; } = 1;
-    
+
     public int Coins { get; set; }
-    
+
     public List<string> Inventory { get; set; } = new List<string>();
+    public string Weapon { get; set; }
+    public string Offhand { get; set; }
+    public string Helmet { get; set; }
+    public string Chestplate { get; set; }
+    public string Legs { get; set; }
 
     public Player(string name, string className, string race)
     {
@@ -37,9 +42,14 @@ public class Player: Characters
         Intelligence = 0;
         Defence = 0;
         Coins = 300; // change amount of coins
+        Weapon = "";
+        Offhand = "";
+        Helmet = "";
+        Chestplate = "";
+        Legs = "";
 
     }
-    
+
     public static void Flee(Player player)
     {
         Random randomFleeDie = new Random();
@@ -83,7 +93,8 @@ public class Player: Characters
                 {
                     player.MaxHealth += 10;
                     player.Health += 10;
-                    Console.WriteLine($"Health has been improved! Your current max health is {player.MaxHealth}"); //TODO need to cap Health to 100 to prevent overhealing
+                    Console.WriteLine(
+                        $"Health has been improved! Your current max health is {player.MaxHealth}"); //TODO need to cap Health to 100 to prevent overhealing
                     break;
                 }
                 else if (option == "intelligence")
@@ -118,12 +129,12 @@ public class Player: Characters
     {
         player.Coins += coin;
         Console.WriteLine($"You got {coin} coin(s). Your current wealth is {player.Coins} coins.");
-        
+
     }
 
     public static void InventoryAccess(Player player) // TODO implement equipping items and using them
     {
-        
+
         while (true)
         {
             foreach (var item in player.Inventory)
@@ -135,52 +146,88 @@ public class Player: Characters
             {
                 Console.WriteLine("You have nothing in your inventory.");
             }
+
             Console.WriteLine("Choose to use item or exit");
             string option = Console.ReadLine().ToLower();
             if (option == "exit")
             {
                 break;
             }
-            else if(option == "equip")
+            else if (option == "equip")
             {
                 int itemId = 1;
-                EquippingItem(player, itemId);
-                
+                EquippingItem(player);
+
             }
         }
 
     }
 
-    public static void EquippingItem(Player player, int itemId)
+    public static void EquippingItem(Player player)
     {
-        Console.WriteLine("What do you want to equip?");
-        
 
-        while (true)    
+
+        while (true)
         {
-            for (int i = 0; i < player.Inventory.Count; i++)
+            Console.WriteLine("What do you want to equip?");
+            foreach (var item in player.Inventory)
             {
-                string option = Console.ReadLine().ToLower();
-                
-                if (player.Inventory.Any(item => item.ToLower() == option))
+                Console.WriteLine(item);
+            }
+            string option = Console.ReadLine().ToLower();
+            
+            if (player.Inventory.Any(item => item.ToLower() == option))
+            {
+                var itemEntry = Items.items.FirstOrDefault(kv => kv.Value.ItemName.ToLower() == option);
+                if (!itemEntry.Equals(default(KeyValuePair<int, Items>)))
                 {
-                    Console.WriteLine($"You equipped {player.Inventory[i]}.");
-                    if (Items.items.TryGetValue(itemId, out var item))
+                    var item = itemEntry.Value;
+                    Console.WriteLine($"You equipped {option}.");
+
+                    switch (item.ItemType)
                     {
-                        player.Attack += item.Attack;
-                        Console.WriteLine($"{item.Attack} attack was added due to equipping {item.ItemName}");
-                        player.Defence += item.Defense;
-                        Console.WriteLine($"{item.Defense} defence was added due to equipping {item.ItemName}");//TODO add the headArmor, chestArmor, lArm, rArm etc, new dictionary equipped items
-                            //TODO add logic to be not possible to wear 2 swords, 2 chests etc
+                        case "Weapon":
+                            player.Weapon = option;
+                            player.Attack += item.Attack;
+                            break;
+                        case "Offhand":
+                            player.Offhand = option;
+                            player.Defence += item.Defense;
+                            break;
+                        case "Helmet":
+                            player.Helmet = option;
+                            player.Defence += item.Defense;
+                            break;
+                        case "Chestplate":
+                            player.Chestplate = option;
+                            player.Defence += item.Defense;
+                            break;
+                        case "Legs":
+                            player.Legs = option;
+                            player.Defence += item.Defense;
+                            break;
+                        default:
+                            Console.WriteLine("This item is usable, not equipable.");
+                            break;
                     }
                 }
-
-                break;
+            }
+            else
+            {
+                Console.WriteLine("Item not found in inventory.");
             }
 
-            break;
+            Console.WriteLine("Do you want to equip another item? [equip/exit]");
+            string choice = Console.ReadLine().ToLower();
+            if (choice == "exit")
+            {
+                break;
+            }
+            else if (choice != "equip")
+            {
+                Console.WriteLine("Invalid option. Please try again.");
+            }
         }
-
-
     }
+
 }
