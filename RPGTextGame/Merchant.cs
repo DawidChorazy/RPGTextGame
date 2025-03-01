@@ -16,6 +16,9 @@ public class Merchant: Characters
             {
                 {"Sword", 100},
                 {"Shield", 80},
+                {"Leather armor", 120},
+                {"Leather cap", 80},
+                {"Leather leggings", 100}
             })
         }
     };

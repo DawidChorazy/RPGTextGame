@@ -14,6 +14,9 @@ public class Items
         { 2, new Items(0, 4, "Shield", "Offhand") },
         { 3, new Items(0, 0, "Potion of Health", "Usable") },
         { 4, new Items(0, 0, "Potion of Strength", "Usable") },
+        {5, new Items(0,4,"Leather armor", "Chestplate")},
+        {6, new Items(0,2,"Leather cap", "Helmet")},
+        {7, new Items(0,3,"Leather leggings", "Legs")},
     };
 
     public Items(int attack, int defense, string itemName, string itemType)

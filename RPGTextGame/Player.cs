@@ -42,11 +42,11 @@ public class Player : Characters
         Intelligence = 0;
         Defence = 0;
         Coins = 300; // change amount of coins
-        Weapon = "";
-        Offhand = "";
-        Helmet = "";
-        Chestplate = "";
-        Legs = "";
+        Weapon = null;
+        Offhand = null;
+        Helmet = null;
+        Chestplate = null;
+        Legs = null;
 
     }
 
@@ -132,7 +132,7 @@ public class Player : Characters
 
     }
 
-    public static void InventoryAccess(Player player) // TODO implement equipping items and using them
+    public static void InventoryAccess(Player player)
     {
 
         while (true)
@@ -189,22 +189,27 @@ public class Player : Characters
                         case "Weapon":
                             player.Weapon = option;
                             player.Attack += item.Attack;
+                            player.Inventory.Remove(option);
                             break;
                         case "Offhand":
                             player.Offhand = option;
                             player.Defence += item.Defense;
+                            player.Inventory.Remove(option);
                             break;
                         case "Helmet":
                             player.Helmet = option;
                             player.Defence += item.Defense;
+                            player.Inventory.Remove(option);
                             break;
                         case "Chestplate":
                             player.Chestplate = option;
                             player.Defence += item.Defense;
+                            player.Inventory.Remove(option);
                             break;
                         case "Legs":
                             player.Legs = option;
                             player.Defence += item.Defense;
+                            player.Inventory.Remove(option);
                             break;
                         default:
                             Console.WriteLine("This item is usable, not equipable.");
