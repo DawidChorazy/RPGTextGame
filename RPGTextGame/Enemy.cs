@@ -4,11 +4,11 @@ public class Enemy: Characters
 {
     public static Dictionary<int, (string,int,int,int,int)> opponents = new Dictionary<int, (string,int, int, int, int)>
     {
-        { 1, ("Goblin", 20, 10,10 , 105) },
-        { 2, ("Chupacabra", 12, 9, 9, 104) }, //TODO EXP TO CHANGE, SHOULDNT BE 100
-        { 3, ("Wolf", 10, 12, 12, 103) }, // If higher level, higher difficulty
-        { 4, ("Ghost", 33, 5, 5, 102) },
-        { 5, ("Wild Boar", 28, 7, 7, 101) }
+        { 1, ("Goblin", 20, 10,10 , 25) },
+        { 2, ("Chupacabra", 12, 9, 9, 24) }, //TODO EXP TO CHANGE, SHOULDNT BE 100
+        { 3, ("Wolf", 10, 12, 12, 23) }, // If higher level, higher difficulty
+        { 4, ("Ghost", 33, 5, 5, 22) },
+        { 5, ("Wild Boar", 28, 7, 7, 21) }
     };
     public string Name { get; set; }
     public override int Health { get; set; }

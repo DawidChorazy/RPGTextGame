@@ -37,12 +37,11 @@ public class Merchant: Characters
 
         }
 
-        public static void Buying(Player player, Merchant foundMerchant) // Buying items is case sensitive. Need to type in trade EXACT SAME name of item to buy it
+        public static void Buying(Player player, Merchant foundMerchant)
         {
             Console.WriteLine("Do you want to buy something? [trade/exit]");
             while (true)
             {
-                Console.WriteLine("[trade/exit] ");
                 string option = Console.ReadLine().ToLower();
                 if (option.ToLower() == "trade")
                 {
@@ -66,6 +65,7 @@ public class Merchant: Characters
                                 {
                                     player.Coins -= price;
                                     Console.WriteLine($"You bought a {buyOption}! It has been added to your inventory.");
+                                    player.Inventory.Add(buyOption);
                                 }
                                 else
                                 {

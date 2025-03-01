@@ -71,9 +71,9 @@ public class Program
         string option = "";
         int randomD2 = randomD2Output.Next(1, 3);
         int randomD4 = randomD4Output.Next(1, 5);
-        int randomD5 = randomD6Output.Next(1, 6); // enemy index
+        int randomD5 = randomD6Output.Next(1, 6);
         int randomD10 = randomD10Output.Next(1, 11);
-        int randomD20 = randomD20Output.Next(1, 21); //die
+        int randomD20 = randomD20Output.Next(1, 21);
         int randomD50 = randomD50Output.Next(1, 51);
         Enemy enemy = Enemy.GetEnemy(randomD5);
         
@@ -84,7 +84,7 @@ public class Program
             {
                 case 1:
                     Console.WriteLine("Critical failure! You stepped into the trap!");
-                    Console.WriteLine($"You lost {randomD10} of health points. Your current health is {player.Health - randomD10}");
+                    Console.WriteLine($"You lost {randomD10} of health points. Your current health is {player.Health -=  randomD10}");
                     Thread.Sleep(2000);
                     break;
 
@@ -111,19 +111,32 @@ public class Program
                 case 12:
                 case 13:
                     Console.WriteLine("Crossroads! Choose to go left or right:");
-                    string cross = Console.ReadLine().ToLower();
-                    if (randomD4 == 1)
+                    
+                    while (true)
                     {
-                        player.Health -= randomD20;
-                        Console.WriteLine(
-                            $"You lost {randomD20} health points due to stepping into trap! Your current health is {player.Health}");
-                        Thread.Sleep(2000);
+                        string cross = Console.ReadLine().ToLower();
+                        if (cross == "left" || cross == "right")
+                        {
+                            if (randomD4 == 1)
+                            {
+                                player.Health -= randomD20;
+                                Console.WriteLine(
+                                    $"You lost {randomD20} health points due to stepping into trap! Your current health is {player.Health}");
+                                Thread.Sleep(2000);
 
-                    }
-                    else
-                    {
-                        Console.WriteLine("Nothing Happens");
-                        Thread.Sleep(2000);
+                            }
+                            else
+                            {
+                                Console.WriteLine("Nothing Happens");
+                                Thread.Sleep(2000);
+                            }
+
+                            break;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid option");
+                        }
                     }
 
                     break;
@@ -139,7 +152,7 @@ public class Program
                 
                 case 16:
                 case 17:
-                    Console.WriteLine("You found enemy (You can fight or flee)");
+                    Console.WriteLine("You found enemy [fight/flee/inventory]");
                     Console.WriteLine(
                         $"You are fighting {enemy.Name} with power of {enemy.Attack} and {enemy.Health} health!");
                     while (true)
@@ -155,6 +168,10 @@ public class Program
                             Player.Flee(player);
                             break;
                         }
+                        else if (option == "inventory")
+                        {
+                            Player.InventoryAccess(player);
+                        }
                         else
                         {
                             Console.WriteLine("Invalid option");
@@ -166,13 +183,13 @@ public class Program
 
                 case 18:
                 case 19:
-                    Console.WriteLine("You found supplies"); //TODO add supplies(default)
+                    Console.WriteLine("You found supplies");
                     Player.CoinsGain(player, randomD20);
                     Thread.Sleep(2000);
                     break;
 
                 case 20:
-                    Console.WriteLine("You found treasure"); //TODO add supplies(better)
+                    Console.WriteLine("You found treasure");
                     Player.CoinsGain(player, randomD50);
                     Thread.Sleep(2000);
                     break;
@@ -192,13 +209,13 @@ public class Program
         {
             roundCounter++;
             Console.WriteLine($"ROUND {roundCounter}");
-            Console.WriteLine("[attack/defend]");
+            Console.WriteLine("[attack/defend/inventory]");
 
             while (true)
             {
                 option = Console.ReadLine().ToLower();
 
-                if (option == "attack" || option == "defend")
+                if (option == "attack" || option == "defend" || option == "inventory")
                     break;
 
                 Console.WriteLine("Invalid option. Please type 'attack' or 'defend'.");
@@ -213,6 +230,10 @@ public class Program
             {
                 Console.WriteLine("You try to defend against monster");
                 defendActive = true;
+            }
+            else if (option == "inventory")
+            {
+                Player.InventoryAccess(player);
             }
 
 
