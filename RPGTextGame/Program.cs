@@ -66,7 +66,9 @@ public class Program
         Random randomD6Output = new Random();
         Random randomD10Output = new Random();
         Random randomD20Output = new Random();
+        Random randomD49utput = new Random();
         Random randomD50Output = new Random();
+        Random randomD100Output = new Random();
 
         string option = "";
         int randomD2 = randomD2Output.Next(1, 3);
@@ -75,12 +77,15 @@ public class Program
         int randomD10 = randomD10Output.Next(1, 11);
         int randomD20 = randomD20Output.Next(1, 21);
         int randomD50 = randomD50Output.Next(1, 51);
+        int randomD48 = randomD49utput.Next(1, 49);
+        int randomD100 = randomD100Output.Next(1, 101);
         Enemy enemy = Enemy.GetEnemy(randomD5);
+        Enemy boss = Enemy.GetBoss(randomD2);
         
 
         if (player.Health > 0)
         {
-            switch (randomD20)
+            switch (randomD48)
             {
                 case 1:
                     Console.WriteLine("Critical failure! You stepped into the trap!");
@@ -98,12 +103,7 @@ public class Program
                     Fighting(player, enemy);
                     break;
 
-                case 5:
-                case 6:
-                case 7:
-                case 8:
-                case 9:
-                case 10:
+                case >= 5 and <= 10:
                     Console.WriteLine("Nothing Happens");
                     Thread.Sleep(2000);
                     break;
@@ -150,8 +150,7 @@ public class Program
                     Merchant.Buying(player, randomMerchant);
                     break;
                 
-                case 16:
-                case 17:
+                case >= 16 and <= 20:
                     Console.WriteLine("You found enemy [fight/flee/inventory]");
                     Console.WriteLine(
                         $"You are fighting {enemy.Name} with power of {enemy.Attack} and {enemy.Health} health!");
@@ -181,26 +180,113 @@ public class Program
                     Thread.Sleep(2000);
                     break;
 
-                case 18:
-                case 19:
+                case 21:
+                case 22:
                     Console.WriteLine("You found supplies");
                     Player.CoinsGain(player, randomD20);
                     Thread.Sleep(2000);
                     break;
 
-                case 20:
+                case 23:
                     Console.WriteLine("You found treasure");
                     Player.CoinsGain(player, randomD50);
                     Thread.Sleep(2000);
                     break;
+                case >= 24 and <= 27:
+                    Console.WriteLine($"You found campsite, you rested beside it and regenerated to {player.Health += randomD20} health");
+                    break;
+                case >= 28 and <= 31:
+                    Console.WriteLine("You felt freezing shiver on your spine. You thought you saw something between trees");
+                    player.DoorCounter++;
+                    if (player.DoorCounter >= 2)
+                    {
+                        Console.WriteLine("Between trees you see hidden illusory doors. You can't resist to enter. [enter]");
+                        option = Console.ReadLine().ToLower();
+                        if (option == "enter" && player.Inventory.Contains("Cursed key"))
+                        {
+                            player.Inventory.Remove("Cursed key");
+                            Console.WriteLine("Thank you for playing! TBC...");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Thank you for playing! TBC...");
+                        }
 
+                    }
+                    Thread.Sleep(2000);
+                    break;
+                case >= 32 and <= 34:
+                    Console.WriteLine("Dead body of other adventurer is under your feet. You spot a weird looking key on his neck.");
+                    Console.WriteLine("You feel that is magic or cursed item [pick/exit]");
+                    option = Console.ReadLine().ToLower();
+                    while (true)
+                    {
+                        if (option == "pick")
+                        {
+                            player.Inventory.Add("Cursed key");
+                            Console.WriteLine("You picked up a key");
+                            break;
+                        }
+                        else if (option == "exit")
+                        {
+                            return;
+                            
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid option");
+                        }
+                    }
+
+                    Thread.Sleep(2000);
+                    break;
+                case >= 35 and <= 43:
+                    Console.WriteLine("Calming breeze of wind gives an opportunity to rest from thinking about this frightening world...");
+                    Thread.Sleep(2000);
+                    break;
+                case >= 44 and <= 47:
+                    Console.WriteLine("You found some berries and ate them");
+                    
+                    Console.WriteLine($"You regenerated {player.Health += randomD4} of your health. Current health is {player.Health}");
+                    Thread.Sleep(2000);
+                    break;
+                case 48:
+                    Console.WriteLine("Abhorrent creature appears from nowhere. You need to fight it, whatever it is [fight/inventory]");
+                    Console.WriteLine(
+                        $"You are fighting {boss.Name} with power of {boss.Attack} and {boss.Health} health!");
+                    while (true)
+                    {
+                        option = Console.ReadLine().ToLower();
+                        if (option == "fight")
+                        {
+                            Fighting(player, boss);
+                            break;
+                        }
+                        else if (option == "flee")
+                        {
+                            Player.Flee(player);
+                            break;
+                        }
+                        else if (option == "inventory")
+                        {
+                            Player.InventoryAccess(player);
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid option");
+                        }
+                    }
+                    Thread.Sleep(2000);
+                        break;
+                    
             }
         }
     }
 
     private static void Fighting(Player player, Enemy opp)
     {
-        Random randomAttackDie = new Random();
+        Random RandomDefensiveDie = new Random();
+        int defensiveDie = RandomDefensiveDie.Next(1, 16);
         string option = "";
         bool defendActive = false;
         int roundCounter = 0;
@@ -239,7 +325,7 @@ public class Program
 
             if (opp.Health > 0)
             {
-                int defensiveDamageTaken = opp.Attack / 2;
+                int defensiveDamageTaken = opp.Attack - defensiveDie;
                 if (defendActive == true)
                 {
                     Console.WriteLine(

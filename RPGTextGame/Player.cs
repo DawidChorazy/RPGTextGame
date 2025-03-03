@@ -9,9 +9,9 @@ public class Player : Characters
     private string Class { get; set; }
     private string Race { get; set; }
 
-    public override int Health { get; set; }
+    public override double Health { get; set; }
 
-    private int MaxHealth { get; set; }
+    private double MaxHealth { get; set; }
     public override int Attack { get; set; }
 
     public override int Defence { get; set; }
@@ -28,6 +28,7 @@ public class Player : Characters
     public string Helmet { get; set; }
     public string Chestplate { get; set; }
     public string Legs { get; set; }
+    public int DoorCounter {get; set;}
 
     public Player(string name, string className, string race)
     {
@@ -47,6 +48,7 @@ public class Player : Characters
         Helmet = null;
         Chestplate = null;
         Legs = null;
+        DoorCounter = 0;
 
     }
 
@@ -120,7 +122,15 @@ public class Player : Characters
         {
             player.Level += 1;
             player.Experience -= 100;
+            player.Health += 0.25 * player.MaxHealth;
+
             Console.WriteLine($"Level up! You are currently Lvl.{player.Level}");
+            if (player.Health >= player.MaxHealth)
+            {
+                player.Health = player.MaxHealth;
+                Console.WriteLine($"You regenerated to your max health of {player.MaxHealth}");
+            }
+            Console.WriteLine($"You regenerated some of your health and you have now {player.Health} health.");
             AddingPlayerAttributes(player);
         }
     }
@@ -147,17 +157,20 @@ public class Player : Characters
                 Console.WriteLine("You have nothing in your inventory.");
             }
 
-            Console.WriteLine("Choose to use item or exit");
+            Console.WriteLine("Choose to [use/equip] item or [exit].");
             string option = Console.ReadLine().ToLower();
             if (option == "exit")
             {
-                break;
+                return;
             }
             else if (option == "equip")
             {
-                int itemId = 1;
                 EquippingItem(player);
 
+            }
+            else if (option == "use")
+            {
+                UsingItem(player);
             }
         }
 
@@ -170,10 +183,12 @@ public class Player : Characters
         while (true)
         {
             Console.WriteLine("What do you want to equip?");
+            Console.WriteLine("------------------");
             foreach (var item in player.Inventory)
             {
-                Console.WriteLine(item);
+                Console.WriteLine($"|{item}|");
             }
+            Console.WriteLine("------------------");
             string option = Console.ReadLine().ToLower();
             
             if (player.Inventory.Any(item => item.ToLower() == option))
@@ -234,5 +249,70 @@ public class Player : Characters
             }
         }
     }
+    
+    public static void UsingItem(Player player)
+    {
+        while (true)
+        {
+            Console.WriteLine("What do you want to use?");
+            Console.WriteLine("------------------");
+            foreach (var item in player.Inventory)
+            {
+                Console.WriteLine("|{item}|");
+            }
+            Console.WriteLine("------------------");
+            string option = Console.ReadLine().ToLower();
+            
+            if (player.Inventory.Any(item => item.ToLower() == option))
+            {
+                var itemEntry = Items.items.FirstOrDefault(kv => kv.Value.ItemName.ToLower() == option);
+                if (!itemEntry.Equals(default(KeyValuePair<int, Items>)))
+                {
+                    var item = itemEntry.Value;
+                    if (item.ItemType == "Usable")
+                    {
+                        player.Attack += item.Attack;
+                        player.Health += item.HealthRecovery;
+                        if (player.Health > 100)
+                        {
+                            player.Health = 100;
+                        }
+                        Console.WriteLine($"You used {option}.");
+                        player.Inventory.Remove(option);
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine("Item not found in inventory.");
+            }
+
+            Console.WriteLine("Do you want to use another item? [use/exit]");
+            string choice = Console.ReadLine().ToLower();
+            if (choice == "exit")
+            {
+                break;
+            }
+            else if (choice != "use")
+            {
+                Console.WriteLine("Invalid option. Please try again.");
+            }
+        }
+    }
+
+    /*public static void PlayerHealing(Player player, Func<int> rollDice)
+    {
+        if (player.Health > player.MaxHealth)
+        {
+            Console.WriteLine($"You healed to your maximum health of {player.MaxHealth}.");
+            player.Health = player.MaxHealth;
+        }
+        else
+        {
+            int healAmount = rollDice();
+            player.Health += healAmount;
+        }
+        
+    }*/
 
 }

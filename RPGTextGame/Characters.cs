@@ -2,7 +2,7 @@ namespace RPGTextGame;
 
 public class Characters
 {
-    public virtual int Health {get; set;}
+    public virtual double Health {get; set;}
     public virtual int Attack {get; set;}
     public virtual int Defence {get; set;}
     

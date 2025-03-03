@@ -7,25 +7,26 @@ public class Merchant: Characters
         {
             1, new Merchant("Jonathan The Alchemist", new Dictionary<string, int>
             {
-                { "Potion Of Health", 50 },
-                { "Potion Of Strength", 75 }
+                { "Small Potion Of Health", 50 },
+                { "Small Potion Of Strength", 75 }
             })
                 },
         {
             2, new Merchant("Eboron The Great Smith", new Dictionary<string, int>
             {
-                {"Sword", 100},
-                {"Shield", 80},
+                {"Wooden Sword", 100},
+                {"Wooden Shield", 80},
                 {"Leather armor", 120},
                 {"Leather cap", 80},
                 {"Leather leggings", 100}
             })
         }
+        //TODO add cursed key merchant
     };
         
         public string Name { get; set; }
         public override int Attack { get; set; }
-        public override int Health { get; set; }
+        public override double Health { get; set; }
         
         public Dictionary<string,int> ShopItems { get; set; }
         
@@ -50,10 +51,12 @@ public class Merchant: Characters
                 {
                     while (true)
                     {
+                        Console.WriteLine("---------------------");
                         foreach (var item in foundMerchant.ShopItems)
                         {
-                            Console.WriteLine($"{item.Key} - {item.Value} coins");
+                            Console.WriteLine($"|{item.Key} - {item.Value} coins|");
                         }
+                        Console.WriteLine("---------------------");
 
                         Console.WriteLine("Type in what do you want to buy or type 'exit' to leave");
                         string buyOption = Console.ReadLine();
@@ -67,12 +70,12 @@ public class Merchant: Characters
                                 if (player.Coins >= price)
                                 {
                                     player.Coins -= price;
-                                    Console.WriteLine($"You bought a {buyOption}! It has been added to your inventory.");
+                                    Console.WriteLine($"You bought a {buyOption}! It has been added to your inventory. You have {player.Coins } coins left.");
                                     player.Inventory.Add(buyOption);
                                 }
                                 else
                                 {
-                                    Console.WriteLine("You don't have enough coins to buy this item.");
+                                    Console.WriteLine($"You don't have enough coins to buy this item. You have {player.Coins } coins.");
                                 }
                             }
                             else
@@ -87,19 +90,18 @@ public class Merchant: Characters
                                 Buying(player, foundMerchant);
                             }
 
-                            break;
+                            else if (continueBuying == "exit")
+                            {
+                                return;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Please enter a valid option");
+                            }
                             
                     }
                 }
-
-                else if (option == "exit")
-                {
-                    return;
-                }
-                else
-                {
-                    Console.WriteLine("Please enter a valid option");
-                }
+                
             }
         }
         public static Merchant GetRandomMerchant()
