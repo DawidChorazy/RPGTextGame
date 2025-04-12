@@ -9,6 +9,8 @@ public class Enemy: Characters
         { 3, ("Wolf", 10, 12, 12, 23) }, // If higher level, higher difficulty
         { 4, ("Ghost", 33, 5, 5, 22) },
         { 5, ("Wild Boar", 28, 7, 7, 21) },
+        { 6, ("Fluffber", 35, 11, 18, 30)},
+        { 7, ("Yeti", 25, 10, 20, 28) },
     };
 
     public static Dictionary<int, (string, int, int, int, int)> bosses = new Dictionary<int, (string, int, int, int, int)>
@@ -19,9 +21,6 @@ public class Enemy: Characters
     public string Name { get; set; }
     public override double Health { get; set; }
     public override int Attack { get; set; }
-    
-    private int MinAttack { get; set; }
-    private int MaxAttack { get; set; }
     public int ExperienceAfterDefeated { get; set; }
     
     public int CoinsAfterDefeated { get; set; }

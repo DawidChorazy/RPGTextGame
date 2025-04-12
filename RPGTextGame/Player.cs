@@ -23,6 +23,8 @@ public class Player : Characters
     public int Coins { get; set; }
 
     public List<string> Inventory { get; set; } = new List<string>();
+    
+    public List<string> EquippedItems { get; set; } = new List<string>();
     public string Weapon { get; set; }
     public string Offhand { get; set; }
     public string Helmet { get; set; }
@@ -157,7 +159,7 @@ public class Player : Characters
                 Console.WriteLine("You have nothing in your inventory.");
             }
 
-            Console.WriteLine("Choose to [use/equip] item or [exit].");
+            Console.WriteLine("Choose to [use/equip/unequip] item or [exit].");
             string option = Console.ReadLine().ToLower();
             if (option == "exit")
             {
@@ -171,6 +173,10 @@ public class Player : Characters
             else if (option == "use")
             {
                 UsingItem(player);
+            }
+            else if (option == "unequip")
+            {
+                UnequippingItem(player);
             }
         }
 
@@ -200,31 +206,46 @@ public class Player : Characters
                     Console.WriteLine($"You equipped {option}.");
 
                     switch (item.ItemType)
-                    {
+                    { //TODO test equipping multiple weapons
                         case "Weapon":
-                            player.Weapon = option;
-                            player.Attack += item.Attack;
-                            player.Inventory.Remove(option);
-                            break;
+                            if(player.Weapon is not null)
+                            {           
+                                player.Weapon = option;
+                                player.Attack += item.Attack;
+                                player.Inventory.Remove(option);
+                                player.EquippedItems.Add(option);
+                                
+                            }
+                            else
+                            {
+                                Console.WriteLine("Item already equipped.");
+                            }
+
+                            break;  
+                 
                         case "Offhand":
                             player.Offhand = option;
                             player.Defence += item.Defense;
                             player.Inventory.Remove(option);
+                            player.EquippedItems.Add(option);
                             break;
                         case "Helmet":
                             player.Helmet = option;
                             player.Defence += item.Defense;
                             player.Inventory.Remove(option);
+                            player.EquippedItems.Add(option);
                             break;
                         case "Chestplate":
                             player.Chestplate = option;
                             player.Defence += item.Defense;
                             player.Inventory.Remove(option);
+                            player.EquippedItems.Add(option);
                             break;
                         case "Legs":
                             player.Legs = option;
                             player.Defence += item.Defense;
                             player.Inventory.Remove(option);
+                            player.EquippedItems.Add(option);
                             break;
                         default:
                             Console.WriteLine("This item is usable, not equipable.");
@@ -248,6 +269,67 @@ public class Player : Characters
                 Console.WriteLine("Invalid option. Please try again.");
             }
         }
+    }
+
+    public static void UnequippingItem(Player player)
+    {
+        while (true)
+        {
+            Console.WriteLine("What do you want to unequip?");
+            foreach (var item in player.EquippedItems)
+            {
+                Console.WriteLine(item);
+            }
+
+            string option = Console.ReadLine().ToLower();
+
+            string itemsToUnequip = player.EquippedItems.FirstOrDefault(i => i.ToLower() == option);
+
+            if (itemsToUnequip != null)
+            {
+
+
+                var itemEntry = Items.items.FirstOrDefault(kv => kv.Value.ItemName.ToLower() == option);
+
+                if (itemEntry.Value != null)
+                {
+                    player.EquippedItems.Remove(itemsToUnequip);
+                    player.Inventory.Add(option);
+
+                    player.Attack -= itemEntry.Value.Attack;
+                    player.Defence -= itemEntry.Value.Defense;
+                    player.Health -= itemEntry.Value.HealthRecovery;
+
+                    Console.WriteLine($"Item {itemEntry.Value.ItemName} unequipped.");
+                }
+                else
+                {
+                    Console.WriteLine("Item not found in inventory.");
+                }
+
+            }
+            else
+            {
+                Console.WriteLine("Item not found on your character.");
+            }
+            Console.WriteLine("Do you want to unequip another item? [unequip/exit]");
+            
+            option = Console.ReadLine().ToLower();
+
+            if (option == "exit")
+            {
+                break;
+            }
+            else if (option == "unequip")
+            {
+                UnequippingItem(player);
+            }
+            else
+            {
+                Console.WriteLine("Invalid option.");
+            }
+        }
+        
     }
     
     public static void UsingItem(Player player)

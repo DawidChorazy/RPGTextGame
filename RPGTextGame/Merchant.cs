@@ -101,6 +101,14 @@ public class Merchant: Characters
                             
                     }
                 }
+                else if (option.ToLower() == "exit")
+                {
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Please enter a valid option");
+                }
                 
             }
         }

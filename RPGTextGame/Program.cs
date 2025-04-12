@@ -64,6 +64,7 @@ public class Program
         Random randomD2Output = new Random();
         Random randomD4Output = new Random();
         Random randomD6Output = new Random();
+        Random randomD7Output = new Random();
         Random randomD10Output = new Random();
         Random randomD20Output = new Random();
         Random randomD49utput = new Random();
@@ -74,12 +75,13 @@ public class Program
         int randomD2 = randomD2Output.Next(1, 3);
         int randomD4 = randomD4Output.Next(1, 5);
         int randomD5 = randomD6Output.Next(1, 6);
+        int randomD7 = randomD7Output.Next(1, 8);
         int randomD10 = randomD10Output.Next(1, 11);
         int randomD20 = randomD20Output.Next(1, 21);
         int randomD50 = randomD50Output.Next(1, 51);
         int randomD48 = randomD49utput.Next(1, 49);
         int randomD100 = randomD100Output.Next(1, 101);
-        Enemy enemy = Enemy.GetEnemy(randomD5);
+        Enemy enemy = Enemy.GetEnemy(randomD7);
         Enemy boss = Enemy.GetBoss(randomD2);
         
 
@@ -210,6 +212,7 @@ public class Program
                         else
                         {
                             Console.WriteLine("Thank you for playing! TBC...");
+                            return;
                         }
 
                     }

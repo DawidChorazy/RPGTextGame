@@ -2,9 +2,9 @@ namespace RPGTextGame;
 
 public class Items
 {
-    public string ItemName;
-    public string ItemDescription;
-    public string ItemType;
+    public string ItemName {get; set;}
+    public string ItemDescription {get; set;}
+    public string ItemType { get; set; }
     public int Attack;
     public int Defense;
     public int HealthRecovery;
