@@ -1,5 +1,6 @@
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 
 namespace RPGTextGame;
 
@@ -11,7 +12,7 @@ public class Player : Characters
 
     public override double Health { get; set; }
 
-    private double MaxHealth { get; set; }
+    public double MaxHealth { get; set; }
     public override int Attack { get; set; }
 
     public override int Defence { get; set; }
@@ -382,19 +383,34 @@ public class Player : Characters
         }
     }
 
-    /*public static void PlayerHealing(Player player, Func<int> rollDice)
+    /*public enum HealthRecOptions
     {
+        BerryRecovery,
+        CampsiteRecovery
+    }
+
+    public static int HealthRecovery(Player player, HealthRecOptions option)
+    {
+        int healedAmount = 0;
+        switch(option)
+        {
+            case HealthRecOptions.BerryRecovery:
+                healedAmount = 5;
+                player.Health += healedAmount;
+                break;
+            case HealthRecOptions.CampsiteRecovery:
+                healedAmount = (int)(player.MaxHealth * 0.3);
+                player.Health += healedAmount;
+                break;
+        }
+
         if (player.Health > player.MaxHealth)
-        {
-            Console.WriteLine($"You healed to your maximum health of {player.MaxHealth}.");
             player.Health = player.MaxHealth;
-        }
-        else
-        {
-            int healAmount = rollDice();
-            player.Health += healAmount;
-        }
-        
+
+        return healedAmount;
     }*/
 
+
+
 }
+
