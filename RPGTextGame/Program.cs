@@ -195,7 +195,13 @@ public class Program
                     Thread.Sleep(2000);
                     break;
                 case >= 24 and <= 27:
-                    Console.WriteLine($"You found campsite, you rested beside it and regenerated to {player.Health += randomD20} health");
+                    Console.WriteLine($"You found campsite, you rested beside it and regenerated to {randomD20} health");
+                    // tu dodaj health loopa
+                    if (player.Health > player.MaxHealth)
+                    {
+                        player.Health = player.MaxHealth;
+                    }
+                    Console.WriteLine($"Your current health is: {player.Health}");
                     break;
                 case >= 28 and <= 31:
                     Console.WriteLine("You felt freezing shiver on your spine. You thought you saw something between trees");
@@ -250,7 +256,12 @@ public class Program
                 case >= 44 and <= 47:
                     Console.WriteLine("You found some berries and ate them");
                     
-                    Console.WriteLine($"You regenerated {player.Health += randomD4} of your health. Current health is {player.Health}");
+                    Console.WriteLine($"You regenerated {randomD4} of your health.");
+                    if (player.Health > player.MaxHealth)
+                    {
+                        player.Health = player.MaxHealth;
+                    }
+                    Console.WriteLine($"Your current health is: {player.Health}");
                     Thread.Sleep(2000);
                     break;
                 case 48:
