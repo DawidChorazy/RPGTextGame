@@ -15,47 +15,11 @@ public class Program
         }
     }
     public static Player StartOfGame()
-        {
-            Console.WriteLine("Welcome to RPGTextGame!");
-            Console.WriteLine("Choose your Name:");
-            string name = Console.ReadLine();
-            string className = "";
-            string race = "";
-
-            while (true)
-            {
-                Console.WriteLine("Choose your class (rogue, archer, warrior, mage):");
-                className = Console.ReadLine();
-
-                if (className == "rogue" || className == "archer" || className == "warrior" || className == "mage")
-                {
-                    break;
-                }
-                else
-                {
-                    Console.WriteLine("Invalid class, enter once again");
-
-                }
-            }
-
-            while (true)
-            {
-                Console.WriteLine("Choose your race (human, elf, orc, dwarf):");
-                race = Console.ReadLine();
-                {
-                    if (race == "human" || race == "elf" || race == "orc" || race == "dwarf")
-                    {
-                        break;
-                    }
-                    else
-                    {
-                        Console.WriteLine("Invalid race, enter once again");
-                    }
-                }
-            }
-
-            return new Player(name, className, race);
-        } 
+    {
+        Player player = new Player();
+        Player.PlayerClassRaceNameSelection(player);
+        return player;
+    } 
         
     
     public static void RandomEventGenerator(Player player)
@@ -195,8 +159,9 @@ public class Program
                     Thread.Sleep(2000);
                     break;
                 case >= 24 and <= 27:
-                    Console.WriteLine($"You found campsite, you rested beside it and regenerated to {randomD20} health");
+                    Console.WriteLine($"You found campsite, you rested beside it and regenerated {randomD20} health");
                     // tu dodaj health loopa
+                    player.Health += randomD20;
                     if (player.Health > player.MaxHealth)
                     {
                         player.Health = player.MaxHealth;
@@ -257,6 +222,7 @@ public class Program
                     Console.WriteLine("You found some berries and ate them");
                     
                     Console.WriteLine($"You regenerated {randomD4} of your health.");
+                    player.Health += randomD4;
                     if (player.Health > player.MaxHealth)
                     {
                         player.Health = player.MaxHealth;

@@ -6,8 +6,8 @@ namespace RPGTextGame;
 
 public class Player : Characters
 {
-    private string Name { get; set; }
-    private string Class { get; set; }
+    public string Name { get; set; }
+    public string Class { get; set; }
     private string Race { get; set; }
 
     public override double Health { get; set; }
@@ -16,7 +16,8 @@ public class Player : Characters
     public override int Attack { get; set; }
 
     public override int Defence { get; set; }
-    private int Intelligence { get; set; }
+    public override int Intelligence { get; set; }
+    public override double DodgeChance { get; set; }
 
     private int Experience { get; set; } = 0;
     private int Level { get; set; } = 1;
@@ -33,13 +34,13 @@ public class Player : Characters
     public string Legs { get; set; }
     public int DoorCounter {get; set;}
 
-    public Player(string name, string className, string race)
+    public Player()
     {
-        Name = name;
-        Class = className;
-        Race = race;
-        Health = 100;
-        MaxHealth = Health;
+        Name = "";
+        Class = "";
+        Race = "";
+        MaxHealth = 100;
+        Health = MaxHealth;
         Attack = 10;
         Experience = 0;
         Level = 1;
@@ -383,34 +384,107 @@ public class Player : Characters
         }
     }
 
-    /*public enum HealthRecOptions
+    public static void PlayerClassRaceNameSelection(Player player)
     {
-        BerryRecovery,
-        CampsiteRecovery
-    }
-
-    public static int HealthRecovery(Player player, HealthRecOptions option)
-    {
-        int healedAmount = 0;
-        switch(option)
+        string className = "";
+        string raceName = "";
+        
+        Console.WriteLine("Choose your Name:");
+        player.Name = Console.ReadLine().ToLower();
+        
+        while (true)
         {
-            case HealthRecOptions.BerryRecovery:
-                healedAmount = 5;
-                player.Health += healedAmount;
-                break;
-            case HealthRecOptions.CampsiteRecovery:
-                healedAmount = (int)(player.MaxHealth * 0.3);
-                player.Health += healedAmount;
-                break;
+            Console.WriteLine("Choose your class (rogue, archer, warrior, mage):");
+            className = Console.ReadLine().ToLower();
+
+            switch (className)
+            {
+                case "rogue":
+                    player.Class = "Rogue";
+                    break;
+                case "archer":
+                    player.Class = "Archer";
+                    break;
+                case "warrior":
+                    player.Class = "Warrior";
+                    break;
+                case "mage":
+                    player.Class = "Mage";
+                    break;
+                default:
+                    Console.WriteLine("Invalid option. Please try again.");
+                    break;
+            }
+
+            break;
+        }
+        while (true)
+        {
+            Console.WriteLine("Choose your race (human, elf, orc, dwarf):");
+            raceName = Console.ReadLine().ToLower();
+
+            switch (raceName)
+            {
+                case "human":
+                    player.Race = "Human";
+                    break;
+                case "elf":
+                    player.Race = "Elf";
+                    break;
+                case "orc":
+                    player.Race = "Orc";
+                    break;
+                case "dwarf":
+                    player.Race = "Dwarf";
+                    break;
+                default:
+                    Console.WriteLine("Invalid option. Please try again.");
+                    break;
+            }
+
+            break;
+        }
+        if (raceName == "human")
+        {
+            player.Attack += 1;
+            player.Defence += 1;
+        }
+        else if (raceName == "elf")
+        {
+            player.Attack += 1;
+            player.Intelligence += 1;
+        }
+        else if (raceName == "orc")
+        {
+            player.Attack += 2;
+        }
+        else if (raceName == "dwarf")
+        {
+            player.Defence += 2;
         }
 
-        if (player.Health > player.MaxHealth)
-            player.Health = player.MaxHealth;
-
-        return healedAmount;
-    }*/
-
-
-
+        if (className == "rogue")
+        {
+            player.Attack += 4;
+            player.MaxHealth = 90;
+            player.Health = 90;
+        }
+        else if (className == "archer")
+        {
+            player.Attack += 1;
+            player.DodgeChance += 0.15;
+        }
+        else if (className == "warrior")
+        {
+            player.Attack += 1;
+            player.Defence += 2;
+            player.MaxHealth += 15;
+        }
+        else if (className == "mage")
+        {
+            player.Intelligence = 3;
+        }
+    }
+    
 }
 

@@ -7,7 +7,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8ef9a550-8403-44eb-8b1e-fba0a666b416" name="Changes" comment="" />
+    <list default="true" id="8ef9a550-8403-44eb-8b1e-fba0a666b416" name="Changes" comment="branch merged into master">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.RPGTextGame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.RPGTextGame/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RPGTextGame/Characters.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RPGTextGame/Characters.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RPGTextGame/Player.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RPGTextGame/Player.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RPGTextGame/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RPGTextGame/Program.cs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -56,7 +61,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    ".NET Project.RPGTextGame.executor": "Debug",
+    ".NET Project.RPGTextGame.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "master",
@@ -138,7 +143,7 @@
       <workItem from="1748364081621" duration="4013000" />
       <workItem from="1748368985210" duration="569000" />
       <workItem from="1748369641315" duration="556000" />
-      <workItem from="1749566335313" duration="1314000" />
+      <workItem from="1749566335313" duration="4767000" />
     </task>
     <task id="LOCAL-00001" summary="added simple hero creating and traveling mechanism">
       <option name="closed" value="true" />
@@ -292,7 +297,15 @@
       <option name="project" value="LOCAL" />
       <updated>1748369544748</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="branch merged into master">
+      <option name="closed" value="true" />
+      <created>1749567716059</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1749567716059</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -344,6 +357,39 @@
     <MESSAGE value="unequip mechanism (not working properly/ logic added)" />
     <MESSAGE value="health recovery update (not implemented)" />
     <MESSAGE value="player health regen is working" />
-    <option name="LAST_COMMIT_MESSAGE" value="player health regen is working" />
+    <MESSAGE value="branch merged into master" />
+    <option name="LAST_COMMIT_MESSAGE" value="branch merged into master" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/RPGTextGame/Program.cs</url>
+          <line>19</line>
+          <properties documentPath="C:\Users\niecw\RiderProjects\RPGTextGame\RPGTextGame\Program.cs" containingFunctionPresentation="Method 'StartOfGame'">
+            <startOffsets>
+              <option value="355" />
+            </startOffsets>
+            <endOffsets>
+              <option value="399" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/RPGTextGame/Player.cs</url>
+          <line>485</line>
+          <properties documentPath="C:\Users\niecw\RiderProjects\RPGTextGame\RPGTextGame\Player.cs" containingFunctionPresentation="Method 'PlayerClassRaceNameSelection'">
+            <startOffsets>
+              <option value="15614" />
+            </startOffsets>
+            <endOffsets>
+              <option value="15615" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

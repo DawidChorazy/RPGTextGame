@@ -5,6 +5,8 @@ public class Characters
     public virtual double Health {get; set;}
     public virtual int Attack {get; set;}
     public virtual int Defence {get; set;}
+    public virtual int Intelligence {get; set;}
+    public virtual double DodgeChance {get; set;}
     
     public int GetDamage(Characters enemy, bool isDefensiveStance)
     {
