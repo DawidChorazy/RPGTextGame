@@ -7,10 +7,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8ef9a550-8403-44eb-8b1e-fba0a666b416" name="Changes" comment="added dodge while class is archer">
-      <change afterPath="$PROJECT_DIR$/RPGTextGame/Spells.cs" afterDir="false" />
+    <list default="true" id="8ef9a550-8403-44eb-8b1e-fba0a666b416" name="Changes" comment="Added spellbook, spellaccess and overall mage upgrades">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.RPGTextGame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.RPGTextGame/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RPGTextGame/Items.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RPGTextGame/Items.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RPGTextGame/Player.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RPGTextGame/Player.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RPGTextGame/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RPGTextGame/Program.cs" afterDir="false" />
     </list>
@@ -62,7 +60,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    ".NET Project.RPGTextGame.executor": "Debug",
+    ".NET Project.RPGTextGame.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "master",
@@ -145,7 +143,7 @@
       <workItem from="1748368985210" duration="569000" />
       <workItem from="1748369641315" duration="556000" />
       <workItem from="1749566335313" duration="5070000" />
-      <workItem from="1749733899978" duration="2972000" />
+      <workItem from="1749733899978" duration="5877000" />
     </task>
     <task id="LOCAL-00001" summary="added simple hero creating and traveling mechanism">
       <option name="closed" value="true" />
@@ -315,7 +313,15 @@
       <option name="project" value="LOCAL" />
       <updated>1749734734040</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="Added spellbook, spellaccess and overall mage upgrades">
+      <option name="closed" value="true" />
+      <created>1749737160820</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1749737160820</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -369,7 +375,8 @@
     <MESSAGE value="player health regen is working" />
     <MESSAGE value="branch merged into master" />
     <MESSAGE value="added dodge while class is archer" />
-    <option name="LAST_COMMIT_MESSAGE" value="added dodge while class is archer" />
+    <MESSAGE value="Added spellbook, spellaccess and overall mage upgrades" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added spellbook, spellaccess and overall mage upgrades" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -379,10 +386,10 @@
           <line>19</line>
           <properties documentPath="C:\Users\niecw\RiderProjects\RPGTextGame\RPGTextGame\Program.cs" containingFunctionPresentation="Method 'StartOfGame'">
             <startOffsets>
-              <option value="355" />
+              <option value="363" />
             </startOffsets>
             <endOffsets>
-              <option value="399" />
+              <option value="407" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="14" />

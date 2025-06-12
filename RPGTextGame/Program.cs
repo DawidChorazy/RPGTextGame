@@ -1,7 +1,7 @@
 ﻿using System.Globalization;
 using RPGTextGame;
 
-public class Program
+public class Program: Player
 {
 
 
@@ -263,90 +263,7 @@ public class Program
         }
     }
 
-    private static void Fighting(Player player, Enemy opp)
-    {
-        Random randomDodgeDie = new Random();
-        Random RandomDefensiveDie = new Random();
-        int defensiveDie = RandomDefensiveDie.Next(1, 16);
-        int rollForDodge = randomDodgeDie.Next(1, 101);
-        string option = "";
-        bool defendActive = false;
-        int roundCounter = 0;
-
-        while (opp.Health > 0 && player.Health > 0)
-        {
-
-                roundCounter++;
-                Console.WriteLine($"ROUND {roundCounter}");
-                Console.WriteLine("[attack/defend/inventory/spells]");
-
-                while (true)
-                {
-                    option = Console.ReadLine().ToLower();
-
-                    if (option == "attack" || option == "defend" || option == "inventory" || option == "spells")
-                        break;
-
-                    Console.WriteLine("Invalid option. Please type 'attack' or 'defend'.");
-                }
-
-
-                if (option == "attack")
-                {
-                    Console.WriteLine($"Enemy got {opp.GetDamage(player, false)} damage. Current enemy health is {opp.Health}");
-                }
-                else if (option == "defend")
-                {
-                    Console.WriteLine("You try to defend against monster");
-                    defendActive = true;
-                }
-                else if (option == "inventory")
-                {
-                    Player.InventoryAccess(player);
-                }
-                else if (option == "spells")
-                {
-                    Player.SpellsAccess(player);
-                }
-
-
-                if (opp.Health > 0)
-                {
-                    int defensiveDamageTaken = opp.Attack - defensiveDie;
-                    int playerDodgeChance = player.DodgeChance;
-                    if (playerDodgeChance >= rollForDodge)
-                    {
-                        Console.WriteLine("You dodged an attack!");
-                    }
-                    else if (defendActive)
-                    {
-                        Console.WriteLine(
-                            $"You got hit for {player.GetDamage(opp, true)}. You have {player.Health} remaining life points");
-
-                        defendActive = false;
-                    }
-                    else
-                    {
-                        Console.WriteLine(
-                            $"You got hit for {player.GetDamage(opp, false)}. You have {player.Health} remaining life points");
-
-                    }
-                }
-        }
-
-
-        if (player.Health <= 0)
-        {
-            Console.WriteLine("Unexpectedly your opponent gives you a kiss of sudden death");
-            Environment.Exit(0);
-        }
-        else if (opp.Health <= 0)
-        {
-            Console.WriteLine("You have slain your opponent");
-            Player.CoinsGain(player, opp.CoinsAfterDefeated );
-            Player.ExperianceGain(player, opp.ExperienceAfterDefeated);
-        }
-    }
+    
     
 }
 ///test

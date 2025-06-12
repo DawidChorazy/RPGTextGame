@@ -30,7 +30,7 @@ public class Player : Characters
     
     public List<string> EquippedItems { get; set; } = new List<string>();
     
-    public List<Spells> SpellBook { get; set; } = new List<Spells>();
+    public static List<Spells> SpellBook { get; set; } = new List<Spells>();
     public string Weapon { get; set; }
     public string Offhand { get; set; }
     public string Helmet { get; set; }
@@ -193,23 +193,37 @@ public class Player : Characters
     public static void SpellsAccess(Player player)
     {
         Console.WriteLine("What do you want to do?");
+        Console.WriteLine("Type '[spell name] info' to see description or 'exit' to leave.");
+
         while (true)
         {
-            foreach (var item in player.SpellBook)
+            Console.WriteLine("\nYour spells:");
+            foreach (var item in SpellBook)
             {
-                Console.WriteLine(item);
+                Console.WriteLine($"- {item.SpellName}");
             }
 
+            Console.Write("\n> ");
             string option = Console.ReadLine().ToLower();
-            var selectedSpell = Spells.spells.Values.FirstOrDefault(s => s.SpellName.ToLower() == option);
 
-            if (option == selectedSpell + " " + "info")
-            {
-                Console.WriteLine(selectedSpell.ItemDescription);
-            }
-            else if (option == "exit")
+            if (option == "exit")
             {
                 break;
+            }
+            else if (option.EndsWith(" info"))
+            {
+                string spellName = option.Replace(" info", "").Trim();
+                var selectedSpell = SpellBook
+                    .FirstOrDefault(s => s.SpellName.ToLower() == spellName);
+
+                if (selectedSpell != null)
+                {
+                    Console.WriteLine($"\n{selectedSpell.ItemDescription}");
+                }
+                else
+                {
+                    Console.WriteLine("You don't have a spell with that name.");
+                }
             }
             else
             {
@@ -217,6 +231,7 @@ public class Player : Characters
             }
         }
     }
+
 
     public static void EquippingItem(Player player)
     {
@@ -422,11 +437,13 @@ public class Player : Characters
     {
         string className = "";
         string raceName = "";
+        bool classChoice = false;
+        bool raceChoice = false;
         
         Console.WriteLine("Choose your Name:");
         player.Name = Console.ReadLine().ToLower();
         
-        while (true)
+        while (!classChoice)
         {
             Console.WriteLine("Choose your class (rogue, archer, warrior, mage):");
             className = Console.ReadLine().ToLower();
@@ -435,24 +452,27 @@ public class Player : Characters
             {
                 case "rogue":
                     player.Class = "Rogue";
+                    classChoice = true;
                     break;
                 case "archer":
                     player.Class = "Archer";
+                    classChoice = true;
                     break;
                 case "warrior":
                     player.Class = "Warrior";
+                    classChoice = true;
                     break;
                 case "mage":
                     player.Class = "Mage";
+                    classChoice = true;
                     break;
                 default:
                     Console.WriteLine("Invalid option. Please try again.");
                     break;
             }
-
-            break;
+            
         }
-        while (true)
+        while (!raceChoice)
         {
             Console.WriteLine("Choose your race (human, elf, orc, dwarf):");
             raceName = Console.ReadLine().ToLower();
@@ -461,22 +481,25 @@ public class Player : Characters
             {
                 case "human":
                     player.Race = "Human";
+                    raceChoice = true;
                     break;
                 case "elf":
                     player.Race = "Elf";
+                    raceChoice = true;
                     break;
                 case "orc":
                     player.Race = "Orc";
+                    raceChoice = true;
                     break;
                 case "dwarf":
                     player.Race = "Dwarf";
+                    raceChoice = true;
                     break;
                 default:
                     Console.WriteLine("Invalid option. Please try again.");
                     break;
             }
-
-            break;
+            
         }
         if (raceName == "human")
         {
@@ -521,9 +544,120 @@ public class Player : Characters
             var spell = Spells.spells.Values.FirstOrDefault(s => s.SpellName == "Sleeping Fart");
             if (spell != null)
             {
-                player.SpellBook.Add(spell);
+                Player.SpellBook.Add(spell);
             }
 
+        }
+    }
+    public static void Fighting(Player player, Enemy opp)
+    {
+        Random randomDodgeDie = new Random();
+        Random RandomDefensiveDie = new Random();
+        int defensiveDie = RandomDefensiveDie.Next(1, 16);
+        int rollForDodge = randomDodgeDie.Next(1, 101);
+        string option = "";
+        bool defendActive = false;
+        int roundCounter = 0;
+        var spellOption = SpellBook.FirstOrDefault(s => s.SpellName == option);
+        string spellToCast = "";
+        int turnsInactive = 0;
+
+        while (opp.Health > 0 && player.Health > 0)
+        {
+
+                roundCounter++;
+                Console.WriteLine($"ROUND {roundCounter}");
+                Console.WriteLine("[attack/cast/defend/inventory/spells]");
+
+                while (true)
+                {
+                    option = Console.ReadLine().ToLower();
+
+                    if (option == "attack" || option.StartsWith("cast ") || option == "defend" || option == "inventory" || option == "spells")
+                        break;
+
+                    Console.WriteLine("Invalid option. Please type [attack/cast + [spell name]/defend/inventory/spells].");
+                }
+
+
+                if (option == "attack")
+                {
+                    Console.WriteLine($"Enemy got {opp.GetDamage(player, false)} damage. Current enemy health is {opp.Health}");
+                }
+                else if (option == "defend")
+                {
+                    Console.WriteLine("You try to defend against monster");
+                    defendActive = true;
+                }
+                else if (option == "inventory")
+                {
+                    Player.InventoryAccess(player);
+                }
+                else if (option == "spells")
+                {
+                    Player.SpellsAccess(player);
+                }
+                else if (option.StartsWith("cast "))
+                {
+                    string spellName = option.Substring(5).Trim();
+
+                    var spell = SpellBook.FirstOrDefault(s => s.SpellName.ToLower() == spellName);
+                    if (spell != null && spell.SpellName == "Sleeping Fart")
+                    {
+                        Console.WriteLine("You cast Sleeping Fart. The enemy is stunned for 2 turns!");
+                        turnsInactive = 2;
+                    }
+                    else
+                    {
+                        Console.WriteLine("You can't cast that spell.");
+                    }
+                }
+                
+                
+                if (opp.Health > 0)
+                {
+                        int defensiveDamageTaken = opp.Attack - defensiveDie;
+                        int playerDodgeChance = player.DodgeChance;
+                        if (turnsInactive > 0)
+                        {
+                            Console.WriteLine($"Enemy is stunned and cannot attack! ({turnsInactive} turns remaining)");
+                            turnsInactive--;
+                        }
+                        else
+                        {
+                            if (playerDodgeChance >= rollForDodge)
+                            {
+                                Console.WriteLine("You dodged an attack!");
+                            }
+                            else if (defendActive)
+                            {
+                                Console.WriteLine(
+                                    $"You got hit for {player.GetDamage(opp, true)}. You have {player.Health} remaining life points");
+
+                                defendActive = false;
+                            }
+                            else
+                            {
+                                Console.WriteLine(
+                                    $"You got hit for {player.GetDamage(opp, false)}. You have {player.Health} remaining life points");
+
+                            }
+                        }
+
+                }
+        }
+
+
+        if (player.Health <= 0)
+        {
+            Console.WriteLine("Unexpectedly your opponent gives you a kiss of sudden death");
+            Environment.Exit(0);
+        }
+        else if (opp.Health <= 0)
+        {
+            Console.WriteLine("You have slain your opponent");
+            Player.CoinsGain(player, opp.CoinsAfterDefeated );
+            Player.ExperianceGain(player, opp.ExperienceAfterDefeated);
         }
     }
     
