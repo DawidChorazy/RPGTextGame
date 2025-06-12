@@ -602,8 +602,9 @@ public class Player : Characters
                     string spellName = option.Substring(5).Trim();
 
                     var spell = SpellBook.FirstOrDefault(s => s.SpellName.ToLower() == spellName);
-                    if (spell != null && spell.SpellName == "Sleeping Fart")
+                    if (spell != null && spell.SpellName == "Sleeping Fart" && player.Mana > spell.ManaDrain)
                     {
+                        player.Mana -= spell.ManaDrain;
                         Console.WriteLine("You cast Sleeping Fart. The enemy is stunned for 2 turns!");
                         turnsInactive = 2;
                     }
