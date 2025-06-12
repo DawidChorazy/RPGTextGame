@@ -7,9 +7,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8ef9a550-8403-44eb-8b1e-fba0a666b416" name="Changes" comment="">
+    <list default="true" id="8ef9a550-8403-44eb-8b1e-fba0a666b416" name="Changes" comment="added dodge while class is archer">
+      <change afterPath="$PROJECT_DIR$/RPGTextGame/Spells.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.RPGTextGame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.RPGTextGame/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RPGTextGame/Characters.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RPGTextGame/Characters.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RPGTextGame/Items.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RPGTextGame/Items.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RPGTextGame/Player.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RPGTextGame/Player.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RPGTextGame/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RPGTextGame/Program.cs" afterDir="false" />
     </list>
@@ -144,7 +145,7 @@
       <workItem from="1748368985210" duration="569000" />
       <workItem from="1748369641315" duration="556000" />
       <workItem from="1749566335313" duration="5070000" />
-      <workItem from="1749733899978" duration="624000" />
+      <workItem from="1749733899978" duration="2972000" />
     </task>
     <task id="LOCAL-00001" summary="added simple hero creating and traveling mechanism">
       <option name="closed" value="true" />
@@ -306,7 +307,15 @@
       <option name="project" value="LOCAL" />
       <updated>1749567716059</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="added dodge while class is archer">
+      <option name="closed" value="true" />
+      <created>1749734734040</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1749734734040</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -359,7 +368,8 @@
     <MESSAGE value="health recovery update (not implemented)" />
     <MESSAGE value="player health regen is working" />
     <MESSAGE value="branch merged into master" />
-    <option name="LAST_COMMIT_MESSAGE" value="branch merged into master" />
+    <MESSAGE value="added dodge while class is archer" />
+    <option name="LAST_COMMIT_MESSAGE" value="added dodge while class is archer" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -376,19 +386,6 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="14" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/RPGTextGame/Program.cs</url>
-          <line>311</line>
-          <properties documentPath="C:\Users\niecw\RiderProjects\RPGTextGame\RPGTextGame\Program.cs" containingFunctionPresentation="Method 'Fighting'">
-            <startOffsets>
-              <option value="12173" />
-            </startOffsets>
-            <endOffsets>
-              <option value="12211" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="16" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

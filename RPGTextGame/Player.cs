@@ -13,8 +13,10 @@ public class Player : Characters
     public override double Health { get; set; }
 
     public double MaxHealth { get; set; }
+    public double MaxMana { get; set; }
+    public double Mana { get; set; }
     public override int Attack { get; set; }
-
+    
     public override int Defence { get; set; }
     public override int Intelligence { get; set; }
     public override int DodgeChance { get; set; }
@@ -27,6 +29,8 @@ public class Player : Characters
     public List<string> Inventory { get; set; } = new List<string>();
     
     public List<string> EquippedItems { get; set; } = new List<string>();
+    
+    public List<Spells> SpellBook { get; set; } = new List<Spells>();
     public string Weapon { get; set; }
     public string Offhand { get; set; }
     public string Helmet { get; set; }
@@ -41,6 +45,8 @@ public class Player : Characters
         Race = "";
         MaxHealth = 100;
         Health = MaxHealth;
+        MaxMana = 0;
+        Mana = MaxMana;
         Attack = 10;
         Experience = 0;
         Level = 1;
@@ -182,6 +188,34 @@ public class Player : Characters
             }
         }
 
+    }
+
+    public static void SpellsAccess(Player player)
+    {
+        Console.WriteLine("What do you want to do?");
+        while (true)
+        {
+            foreach (var item in player.SpellBook)
+            {
+                Console.WriteLine(item);
+            }
+
+            string option = Console.ReadLine().ToLower();
+            var selectedSpell = Spells.spells.Values.FirstOrDefault(s => s.SpellName.ToLower() == option);
+
+            if (option == selectedSpell + " " + "info")
+            {
+                Console.WriteLine(selectedSpell.ItemDescription);
+            }
+            else if (option == "exit")
+            {
+                break;
+            }
+            else
+            {
+                Console.WriteLine("Invalid option. Please try again.");
+            }
+        }
     }
 
     public static void EquippingItem(Player player)
@@ -483,6 +517,13 @@ public class Player : Characters
         else if (className == "mage")
         {
             player.Intelligence = 3;
+            player.MaxMana = 100;
+            var spell = Spells.spells.Values.FirstOrDefault(s => s.SpellName == "Sleeping Fart");
+            if (spell != null)
+            {
+                player.SpellBook.Add(spell);
+            }
+
         }
     }
     

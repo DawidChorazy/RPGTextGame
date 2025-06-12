@@ -275,58 +275,63 @@ public class Program
 
         while (opp.Health > 0 && player.Health > 0)
         {
-            roundCounter++;
-            Console.WriteLine($"ROUND {roundCounter}");
-            Console.WriteLine("[attack/defend/inventory]");
 
-            while (true)
-            {
-                option = Console.ReadLine().ToLower();
+                roundCounter++;
+                Console.WriteLine($"ROUND {roundCounter}");
+                Console.WriteLine("[attack/defend/inventory/spells]");
 
-                if (option == "attack" || option == "defend" || option == "inventory")
-                    break;
-
-                Console.WriteLine("Invalid option. Please type 'attack' or 'defend'.");
-            }
-
-
-            if (option == "attack")
-            {
-                Console.WriteLine($"Enemy got {opp.GetDamage(player, false)} damage. Current enemy health is {opp.Health}");
-            }
-            else if (option == "defend")
-            {
-                Console.WriteLine("You try to defend against monster");
-                defendActive = true;
-            }
-            else if (option == "inventory")
-            {
-                Player.InventoryAccess(player);
-            }
-
-
-            if (opp.Health > 0)
-            {
-                int defensiveDamageTaken = opp.Attack - defensiveDie;
-                int playerDodgeChance = player.DodgeChance;
-                if (playerDodgeChance >= rollForDodge)
+                while (true)
                 {
-                    Console.WriteLine("You dodged an attack!");
+                    option = Console.ReadLine().ToLower();
+
+                    if (option == "attack" || option == "defend" || option == "inventory" || option == "spells")
+                        break;
+
+                    Console.WriteLine("Invalid option. Please type 'attack' or 'defend'.");
                 }
-                else if (defendActive)
+
+
+                if (option == "attack")
                 {
-                    Console.WriteLine(
-                        $"You got hit for {player.GetDamage(opp, true)}. You have {player.Health} remaining life points");
-                    
-                    defendActive = false;
+                    Console.WriteLine($"Enemy got {opp.GetDamage(player, false)} damage. Current enemy health is {opp.Health}");
                 }
-                else
+                else if (option == "defend")
                 {
-                    Console.WriteLine(
-                        $"You got hit for {player.GetDamage(opp, false)}. You have {player.Health} remaining life points");
-                    
+                    Console.WriteLine("You try to defend against monster");
+                    defendActive = true;
                 }
-            }
+                else if (option == "inventory")
+                {
+                    Player.InventoryAccess(player);
+                }
+                else if (option == "spells")
+                {
+                    Player.SpellsAccess(player);
+                }
+
+
+                if (opp.Health > 0)
+                {
+                    int defensiveDamageTaken = opp.Attack - defensiveDie;
+                    int playerDodgeChance = player.DodgeChance;
+                    if (playerDodgeChance >= rollForDodge)
+                    {
+                        Console.WriteLine("You dodged an attack!");
+                    }
+                    else if (defendActive)
+                    {
+                        Console.WriteLine(
+                            $"You got hit for {player.GetDamage(opp, true)}. You have {player.Health} remaining life points");
+
+                        defendActive = false;
+                    }
+                    else
+                    {
+                        Console.WriteLine(
+                            $"You got hit for {player.GetDamage(opp, false)}. You have {player.Health} remaining life points");
+
+                    }
+                }
         }
 
 
