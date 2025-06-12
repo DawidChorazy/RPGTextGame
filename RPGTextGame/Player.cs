@@ -17,7 +17,7 @@ public class Player : Characters
 
     public override int Defence { get; set; }
     public override int Intelligence { get; set; }
-    public override double DodgeChance { get; set; }
+    public override int DodgeChance { get; set; }
 
     private int Experience { get; set; } = 0;
     private int Level { get; set; } = 1;
@@ -472,7 +472,7 @@ public class Player : Characters
         else if (className == "archer")
         {
             player.Attack += 1;
-            player.DodgeChance += 0.15;
+            player.DodgeChance += 15;
         }
         else if (className == "warrior")
         {

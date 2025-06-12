@@ -265,8 +265,10 @@ public class Program
 
     private static void Fighting(Player player, Enemy opp)
     {
+        Random randomDodgeDie = new Random();
         Random RandomDefensiveDie = new Random();
         int defensiveDie = RandomDefensiveDie.Next(1, 16);
+        int rollForDodge = randomDodgeDie.Next(1, 101);
         string option = "";
         bool defendActive = false;
         int roundCounter = 0;
@@ -306,7 +308,12 @@ public class Program
             if (opp.Health > 0)
             {
                 int defensiveDamageTaken = opp.Attack - defensiveDie;
-                if (defendActive == true)
+                int playerDodgeChance = player.DodgeChance;
+                if (playerDodgeChance >= rollForDodge)
+                {
+                    Console.WriteLine("You dodged an attack!");
+                }
+                else if (defendActive)
                 {
                     Console.WriteLine(
                         $"You got hit for {player.GetDamage(opp, true)}. You have {player.Health} remaining life points");

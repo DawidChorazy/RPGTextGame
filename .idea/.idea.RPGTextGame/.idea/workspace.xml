@@ -7,7 +7,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8ef9a550-8403-44eb-8b1e-fba0a666b416" name="Changes" comment="branch merged into master">
+    <list default="true" id="8ef9a550-8403-44eb-8b1e-fba0a666b416" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.RPGTextGame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.RPGTextGame/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RPGTextGame/Characters.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RPGTextGame/Characters.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RPGTextGame/Player.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RPGTextGame/Player.cs" afterDir="false" />
@@ -61,7 +61,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    ".NET Project.RPGTextGame.executor": "Run",
+    ".NET Project.RPGTextGame.executor": "Debug",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "master",
@@ -143,7 +143,8 @@
       <workItem from="1748364081621" duration="4013000" />
       <workItem from="1748368985210" duration="569000" />
       <workItem from="1748369641315" duration="556000" />
-      <workItem from="1749566335313" duration="4767000" />
+      <workItem from="1749566335313" duration="5070000" />
+      <workItem from="1749733899978" duration="624000" />
     </task>
     <task id="LOCAL-00001" summary="added simple hero creating and traveling mechanism">
       <option name="closed" value="true" />
@@ -377,17 +378,17 @@
           <option name="timeStamp" value="14" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/RPGTextGame/Player.cs</url>
-          <line>485</line>
-          <properties documentPath="C:\Users\niecw\RiderProjects\RPGTextGame\RPGTextGame\Player.cs" containingFunctionPresentation="Method 'PlayerClassRaceNameSelection'">
+          <url>file://$PROJECT_DIR$/RPGTextGame/Program.cs</url>
+          <line>311</line>
+          <properties documentPath="C:\Users\niecw\RiderProjects\RPGTextGame\RPGTextGame\Program.cs" containingFunctionPresentation="Method 'Fighting'">
             <startOffsets>
-              <option value="15614" />
+              <option value="12173" />
             </startOffsets>
             <endOffsets>
-              <option value="15615" />
+              <option value="12211" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="15" />
+          <option name="timeStamp" value="16" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
