@@ -7,7 +7,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8ef9a550-8403-44eb-8b1e-fba0a666b416" name="Changes" comment="" />
+    <list default="true" id="8ef9a550-8403-44eb-8b1e-fba0a666b416" name="Changes" comment="added logic to Fireball spell and ignition of enemies">
+      <change beforePath="$PROJECT_DIR$/RPGTextGame/Player.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RPGTextGame/Player.cs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -54,21 +56,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    ".NET Project.RPGTextGame.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "master",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "vcs.Git",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;.NET Project.RPGTextGame.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;vcs.Git&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="RPGTextGame" type="DotNetProject" factoryName=".NET Project">
       <option name="EXE_PATH" value="" />
@@ -140,6 +142,7 @@
       <workItem from="1748369641315" duration="556000" />
       <workItem from="1749566335313" duration="5070000" />
       <workItem from="1749733899978" duration="6104000" />
+      <workItem from="1749821163391" duration="1321000" />
     </task>
     <task id="LOCAL-00001" summary="added simple hero creating and traveling mechanism">
       <option name="closed" value="true" />
@@ -333,7 +336,23 @@
       <option name="project" value="LOCAL" />
       <updated>1749740006289</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="Added potion of mana and merchant with spells">
+      <option name="closed" value="true" />
+      <created>1749821486697</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1749821486697</updated>
+    </task>
+    <task id="LOCAL-00026" summary="added logic to Fireball spell and ignition of enemies">
+      <option name="closed" value="true" />
+      <created>1749822008193</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1749822008193</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -366,7 +385,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="added simple hero creating and traveling mechanism" />
     <MESSAGE value="created basic hero creating and travel mechanism" />
     <MESSAGE value="added enemies, stats of player, simple(not yet working) fighting and fleeing mechanic" />
     <MESSAGE value="added player stats, few enemies and fighting mechanic(not yet working)" />
@@ -390,7 +408,9 @@
     <MESSAGE value="Added spellbook, spellaccess and overall mage upgrades" />
     <MESSAGE value="added casting spells and fixed minor bug when choosing class and race" />
     <MESSAGE value="added manadrain to spells" />
-    <option name="LAST_COMMIT_MESSAGE" value="added manadrain to spells" />
+    <MESSAGE value="Added potion of mana and merchant with spells" />
+    <MESSAGE value="added logic to Fireball spell and ignition of enemies" />
+    <option name="LAST_COMMIT_MESSAGE" value="added logic to Fireball spell and ignition of enemies" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -406,7 +426,7 @@
               <option value="407" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="14" />
+          <option name="timeStamp" value="15" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

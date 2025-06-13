@@ -671,6 +671,15 @@ public class Player : Characters
                         }
 
                 }
+
+                var minorRecoverySpell = Player.SpellBook.FirstOrDefault(s => s.SpellName == "Minor Recovery");
+
+                if (minorRecoverySpell != null)
+                {
+                    player.Health += minorRecoverySpell.HealthRecovery;
+                    player.Mana += minorRecoverySpell.ManaRecovery;
+                    Console.WriteLine($"You regenerated {minorRecoverySpell.HealthRecovery} health and {minorRecoverySpell.ManaRecovery} mana due to Minor Recovery spell.");
+                }
         }
 
 
