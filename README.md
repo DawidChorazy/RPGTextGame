@@ -19,7 +19,7 @@
 # Installation
 
 ## Clone the repository:
-git clone https://github.com/yourusername/RPGTextGame.git
+git clone https://github.com/DawidChorazy/RPGTextGame.git
 
 
 ## Navigate to the project folder:
