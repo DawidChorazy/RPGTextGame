@@ -558,6 +558,8 @@ public class Player : Characters
     {
         Random randomDodgeDie = new Random();
         Random RandomDefensiveDie = new Random();
+        Random randomIgniteDie = new Random();
+        int ignite = randomIgniteDie.Next(1, 5);
         int defensiveDie = RandomDefensiveDie.Next(1, 16);
         int rollForDodge = randomDodgeDie.Next(1, 101);
         string option = "";
@@ -566,6 +568,7 @@ public class Player : Characters
         var spellOption = SpellBook.FirstOrDefault(s => s.SpellName == option);
         string spellToCast = "";
         int turnsInactive = 0;
+        int turnsIgnited = 0;
 
         while (opp.Health > 0 && player.Health > 0)
         {
@@ -613,6 +616,17 @@ public class Player : Characters
                         Console.WriteLine("You cast Sleeping Fart. The enemy is stunned for 2 turns!");
                         turnsInactive = 2;
                     }
+                    else if (spell != null && spell.SpellName == "Fireball" && player.Mana > spell.ManaDrain)
+                    {
+                        player.Mana -= spell.ManaDrain;
+                        Console.WriteLine($"You cast Fireball. You deal {spell.Attack} damage.");
+                        opp.Health -= spell.Attack;
+
+                        if (ignite == 4)
+                        {
+                            turnsIgnited = 2;
+                        }
+                    }
                     else
                     {
                         Console.WriteLine("You can't cast that spell.");
@@ -624,6 +638,7 @@ public class Player : Characters
                 {
                         int defensiveDamageTaken = opp.Attack - defensiveDie;
                         int playerDodgeChance = player.DodgeChance;
+
                         if (turnsInactive > 0)
                         {
                             Console.WriteLine($"Enemy is stunned and cannot attack! ({turnsInactive} turns remaining)");
@@ -648,6 +663,11 @@ public class Player : Characters
                                     $"You got hit for {player.GetDamage(opp, false)}. You have {player.Health} remaining life points");
 
                             }
+                        }
+                        if (turnsIgnited > 0)
+                        {
+                            opp.Health -= 3;
+                            turnsIgnited--;
                         }
 
                 }

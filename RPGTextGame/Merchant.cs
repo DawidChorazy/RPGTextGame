@@ -26,7 +26,7 @@ public class Merchant: Characters
             {
                 {"Fireball", 100},
                 {"Minor recovery", 80},
-                
+                {"Small Potion of Mana", 50}
             })
         }
         //TODO add cursed key merchant
