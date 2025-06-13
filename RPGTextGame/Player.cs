@@ -614,16 +614,19 @@ public class Player : Characters
                     {
                         player.Mana -= spell.ManaDrain;
                         Console.WriteLine("You cast Sleeping Fart. The enemy is stunned for 2 turns!");
+                        Console.WriteLine($"You lost {spell.ManaDrain} mana.");
                         turnsInactive = 2;
                     }
                     else if (spell != null && spell.SpellName == "Fireball" && player.Mana > spell.ManaDrain)
                     {
                         player.Mana -= spell.ManaDrain;
                         Console.WriteLine($"You cast Fireball. You deal {spell.Attack} damage.");
+                        Console.WriteLine($"You lost {spell.ManaDrain} mana.");
                         opp.Health -= spell.Attack;
 
                         if (ignite == 4)
                         {
+                            Console.WriteLine("You ignited your enemy!");
                             turnsIgnited = 2;
                         }
                     }
