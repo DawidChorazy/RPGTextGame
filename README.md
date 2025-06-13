@@ -10,7 +10,7 @@
 
 - **Combat System**: Engage in turn-based combat with various enemies. Both you and your opponent deal random damage within a certain range.
 
-- **Merchant System**: Encounter merchants who sell useful items for coins. You earn coins by defeating enemies and completing tasks.
+- **Merchant System**: Encounter merchants who sell useful items for coins. You earn coins by defeating enemies.
 
 - **Equipment System**: Equip your character with items that boost your stats, like weapons and armor.
 
