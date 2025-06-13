@@ -7,8 +7,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8ef9a550-8403-44eb-8b1e-fba0a666b416" name="Changes" comment="added logic to Fireball spell and ignition of enemies">
-      <change beforePath="$PROJECT_DIR$/RPGTextGame/Player.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RPGTextGame/Player.cs" afterDir="false" />
+    <list default="true" id="8ef9a550-8403-44eb-8b1e-fba0a666b416" name="Changes" comment="QOL">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.RPGTextGame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.RPGTextGame/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RPGTextGame/Merchant.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RPGTextGame/Merchant.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -142,7 +143,7 @@
       <workItem from="1748369641315" duration="556000" />
       <workItem from="1749566335313" duration="5070000" />
       <workItem from="1749733899978" duration="6104000" />
-      <workItem from="1749821163391" duration="1321000" />
+      <workItem from="1749821163391" duration="2340000" />
     </task>
     <task id="LOCAL-00001" summary="added simple hero creating and traveling mechanism">
       <option name="closed" value="true" />
@@ -352,7 +353,23 @@
       <option name="project" value="LOCAL" />
       <updated>1749822008193</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="added logic to minor recovery spell">
+      <option name="closed" value="true" />
+      <created>1749822684717</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1749822684717</updated>
+    </task>
+    <task id="LOCAL-00028" summary="QOL">
+      <option name="closed" value="true" />
+      <created>1749822899620</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1749822899620</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -385,8 +402,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="created basic hero creating and travel mechanism" />
-    <MESSAGE value="added enemies, stats of player, simple(not yet working) fighting and fleeing mechanic" />
     <MESSAGE value="added player stats, few enemies and fighting mechanic(not yet working)" />
     <MESSAGE value="Fighting and fleeing mechanic is working properly" />
     <MESSAGE value="removed error when typing random string when encountering enemy" />
@@ -410,7 +425,9 @@
     <MESSAGE value="added manadrain to spells" />
     <MESSAGE value="Added potion of mana and merchant with spells" />
     <MESSAGE value="added logic to Fireball spell and ignition of enemies" />
-    <option name="LAST_COMMIT_MESSAGE" value="added logic to Fireball spell and ignition of enemies" />
+    <MESSAGE value="added logic to minor recovery spell" />
+    <MESSAGE value="QOL" />
+    <option name="LAST_COMMIT_MESSAGE" value="QOL" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

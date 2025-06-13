@@ -26,6 +26,7 @@ public class Merchant: Characters
             {
                 {"Fireball", 100},
                 {"Minor recovery", 80},
+                {"Sleeping Fart", 200},
                 {"Small Potion of Mana", 50}
             })
         }

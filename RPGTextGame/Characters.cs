@@ -2,6 +2,7 @@ namespace RPGTextGame;
 
 public class Characters
 {
+    public virtual string Class { get; set; }
     public virtual double Health {get; set;}
     public virtual int Attack {get; set;}
     public virtual int Defence {get; set;}
@@ -10,8 +11,17 @@ public class Characters
     
     public int GetDamage(Characters enemy, bool isDefensiveStance)
     {
+        float attack = 0;
         Random randomAttackDie = new Random();
-        float attack = randomAttackDie.Next(2, 20);
+        if (enemy.Class != "mage")
+        {
+            attack = randomAttackDie.Next(2, 20);
+        }
+        else
+        {
+            attack = randomAttackDie.Next(2, 9);
+        }
+        
         attack /= 10;
         int damage = Convert.ToInt32(enemy.Attack * attack);
         if (isDefensiveStance)

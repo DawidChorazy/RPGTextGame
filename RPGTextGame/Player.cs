@@ -7,7 +7,7 @@ namespace RPGTextGame;
 public class Player : Characters
 {
     public string Name { get; set; }
-    public string Class { get; set; }
+    public override string Class { get; set; }
     private string Race { get; set; }
 
     public override double Health { get; set; }
