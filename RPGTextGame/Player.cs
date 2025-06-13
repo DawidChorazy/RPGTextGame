@@ -406,9 +406,14 @@ public class Player : Characters
                     {
                         player.Attack += item.Attack;
                         player.Health += item.HealthRecovery;
+                        player.Mana += item.ManaRecovery;
+                        if (player.Mana >= 100)
+                        {
+                            player.Mana = player.MaxMana;
+                        }
                         if (player.Health > 100)
                         {
-                            player.Health = 100;
+                            player.Health = player.MaxHealth;
                         }
                         Console.WriteLine($"You used {option}.");
                         player.Inventory.Remove(option);

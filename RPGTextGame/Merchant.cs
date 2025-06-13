@@ -20,6 +20,14 @@ public class Merchant: Characters
                 {"Leather cap", 80},
                 {"Leather leggings", 100}
             })
+        },
+        {
+            3, new Merchant("Visuvius The Runechant", new Dictionary<string, int>
+            {
+                {"Fireball", 100},
+                {"Minor recovery", 80},
+                
+            })
         }
         //TODO add cursed key merchant
     };
