@@ -8,7 +8,7 @@ public class Merchant: Characters
             1, new Merchant("Jonathan The Alchemist", new Dictionary<string, int>
             {
                 { "Small Potion Of Health", 50 },
-                { "Small Potion Of Strength", 75 }
+                { "Small Potion Of Strength", 75 } //add mana pot
             })
                 },
         {
@@ -78,8 +78,13 @@ public class Merchant: Characters
                             {
                                 if (player.Coins >= price)
                                 {
+
                                     player.Coins -= price;
                                     Console.WriteLine($"You bought a {buyOption}! It has been added to your inventory. You have {player.Coins } coins left.");
+                                   /* if (foundMerchant.Name == "Visuvius The Runechant")
+                                    {
+                                        Player.SpellToSpellbookAdding(buyOption); // idk
+                                    } */
                                     player.Inventory.Add(buyOption);
                                 }
                                 else
