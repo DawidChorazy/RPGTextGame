@@ -13,8 +13,7 @@ public class Enemy: Characters
         { 7, ("Yeti", 25, 10, 20, 28) },
         { 8, ("kots", 25, 10, 20, 28) },
     };
-    //lol
-    //lol2
+
     
     public static Dictionary<int, (string, int, int, int, int)> bosses = new Dictionary<int, (string, int, int, int, int)>
         {
