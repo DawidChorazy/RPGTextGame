@@ -2,7 +2,7 @@ namespace RPGTextGame;
 
 public class Enemy: Characters
 {
-    public static Dictionary<int, (string,int,int,int,int)> opponents = new Dictionary<int, (string,int, int, int, int)>
+    public static Dictionary<int, (string,int,int,int,int)> opponents = new Dictionary<int, (string, int, int, int, int)>
     {
         { 1, ("Goblin", 20, 10,10 , 25) },
         { 2, ("Chupacabra", 12, 9, 9, 24) }, //TODO EXP TO CHANGE, SHOULDNT BE 100
@@ -11,8 +11,11 @@ public class Enemy: Characters
         { 5, ("Wild Boar", 28, 7, 7, 21) },
         { 6, ("Fluffber", 35, 11, 18, 30)},
         { 7, ("Yeti", 25, 10, 20, 28) },
+        { 8, ("kots", 25, 10, 20, 28) },
     };
-
+    //lol
+    //lol2
+    
     public static Dictionary<int, (string, int, int, int, int)> bosses = new Dictionary<int, (string, int, int, int, int)>
         {
             {1, ("Void bear", 77, 11, 34, 60) },
